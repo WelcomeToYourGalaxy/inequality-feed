@@ -471,11 +471,11 @@ GEO3 = [
 TOPICS = [
     ("selfsufficiency", "Self-sufficiency and the freedom to leave", [
         ("self-sufficiency", []), ("self sufficient", ["household", "community", "food", "energy"]),
-        ("subsistence", ["displaced", "lost", "erosion", "criminalis", "criminaliz"]),
-        ("commons", ["enclosure", "loss", "privatis", "privatiz", "access"]),
+        ("subsistence", ["displaced", "lost", "erosion", "criminalis*", "criminaliz*"]),
+        ("commons", ["enclosure", "loss", "privatis*", "privatiz*", "access"]),
         ("land access", []), ("smallholder", ["displaced", "squeezed", "credit", "land"]),
         ("food sovereignty", []), ("right to repair", []),
-        ("informal economy", ["criminalis", "criminaliz", "squeezed", "share of"]),
+        ("informal economy", ["criminalis*", "criminaliz*", "squeezed", "share of"]),
         ("dependency", ["market", "wage", "imports", "system", "structural"]),
         ("degrowth", []), ("cooperative", ["worker", "movement", "growth", "model"]),
     ]),
@@ -519,7 +519,7 @@ TOPICS = [
         ("payday", ["loan", "lending", "rate"]), ("predatory lending", []),
         ("unbanked", []), ("financial exclusion", []), ("microfinance", ["debt", "crisis", "rates"]),
         ("small business lending", ["fell", "gap", "denied", "decline"]),
-        ("credit score", ["algorithm", "bias", "denied", "penalis", "penaliz"]),
+        ("credit score", ["algorithm", "bias", "denied", "penalis*", "penaliz*"]),
         ("household debt", ["record", "rise", "burden", "level"]),
     ]),
     ("regional", "Regional and spatial inequality", [
@@ -538,13 +538,13 @@ TOPICS = [
         ("unpaid labour", []), ("unpaid labor", []),
     ]),
     ("services", "Access to public services", [
-        ("public services", ["cuts", "access", "unequal", "underfunded", "privatis", "privatiz"]),
+        ("public services", ["cuts", "access", "unequal", "underfunded", "privatis*", "privatiz*"]),
         ("healthcare access", []), ("out-of-pocket", ["health", "medical", "cost"]),
         ("universal healthcare", []), ("austerity", []),
         ("public spending", ["cuts", "share", "per capita", "unequal"]),
         ("underfunded", ["hospital", "school", "service", "clinic"]),
         ("user fees", ["health", "school", "water", "service"]),
-        ("water access", ["cost", "cut off", "unaffordable", "privatis"]),
+        ("water access", ["cost", "cut off", "unaffordable", "privatis*"]),
     ]),
     ("taxation", "Taxation and who pays", [
         ("tax avoidance", []), ("tax evasion", []), ("tax haven", []),
@@ -619,8 +619,8 @@ TOPICS = [
         ("delisting", []), ("take-private", []), ("taken private", []),
         ("community bank", ["crowded out", "decline", "closure", "squeezed"]),
         ("smaller banks", ["crowded out", "squeezed", "excluded"]),
-        ("democratis", ["investing", "finance", "access"]),
-        ("democratiz", ["investing", "finance", "access"]),
+        ("democratis*", ["investing", "finance", "access"]),
+        ("democratiz*", ["investing", "finance", "access"]),
     ]),
 ]
 
