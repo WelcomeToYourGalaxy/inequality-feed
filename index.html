@@ -327,7 +327,10 @@ const REPO = 'WelcomeToYourGalaxy/inequality-feed';
 const BRANCH = 'main';
 const ENDPOINTS = [
     () => 'https://raw.githubusercontent.com/' + REPO + '/' + BRANCH + '/wire_inequality.json?t=' + Date.now(),
-    () => 'https://cdn.jsdelivr.net/gh/' + REPO + '@' + BRANCH + '/wire_inequality.json'
+    // jsDelivr caches @main for hours. Without a buster it will happily serve
+    // a wire from before the first harvest, and an empty wire parses fine —
+    // which is how this page once showed "0 stories" while 734 sat on main.
+    () => 'https://cdn.jsdelivr.net/gh/' + REPO + '@' + BRANCH + '/wire_inequality.json?t=' + Date.now()
 ];
 
 // A selected chip prints #131311 on the topic colour, so every value here is
@@ -527,15 +530,33 @@ async function load() {
     state.loading = true; $refresh.disabled = true; $prog.style.width = '40%';
     setStatus('Loading the wire…', '');
 
-    let data = null, err = null;
+    // Take the first endpoint that returns stories. An endpoint that answers
+    // with an empty wire is remembered but not accepted while others remain to
+    // try: a stale mirror serving the pre-harvest seed parses perfectly well,
+    // and silently rendering it as "no stories" hides a feed that is running.
+    let data = null, empty = null, err = null;
     for (const ep of ENDPOINTS) {
         try {
             const res = await fetch(ep(), { cache: 'no-store' });
             if (!res.ok) { err = 'HTTP ' + res.status; continue; }
-            data = await res.json(); break;
+            const body = await res.json();
+            if (!Array.isArray(body.items)) { err = 'unexpected shape'; continue; }
+            if (body.items.length) { data = body; break; }
+            if (!empty || (body.generated || '') > (empty.generated || '')) empty = body;
         } catch (e) { err = e.message; }
     }
+    if (!data && empty) data = empty;
     $prog.style.width = '100%';
+
+    // An empty wire is not a normal state once the harvester has run, so say so
+    // rather than printing a tidy row of zeroes that looks like a quiet day.
+    if (data && Array.isArray(data.items) && data.items.length === 0) {
+        state.loading = false; $refresh.disabled = false; $prog.style.width = '0';
+        render();
+        setStatus('The wire is empty. Either the harvester has not run yet, or a mirror '
+                  + 'served a copy from before it did — press Refresh in a minute.', 'error');
+        return;
+    }
 
     if (!data || !Array.isArray(data.items)) {
         state.loading = false; $refresh.disabled = false; $prog.style.width = '0';
@@ -545,7 +566,7 @@ async function load() {
 
     state.items = data.items.map(i => ({
         title: i.t, link: i.u, outlet: i.o, lang: i.g, region: i.r,
-        kind: i.k, ts: i.d, snippet: i.s, topics: i.x || ['climate'],
+        kind: i.k, ts: i.d, snippet: i.s, topics: i.x || [],
         score: i.p || 0,
         ll: (i.ll && i.ll.length === 2) ? i.ll : null, pin: i.pn || null, why: i.y || [], places: i.w || ['unlocated'], subs: i.sr || ['unlocated'], spots: i.pl || ['unlocated'],
         standing: i.st || 'press'

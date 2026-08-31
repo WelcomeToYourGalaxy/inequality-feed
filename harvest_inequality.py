@@ -171,6 +171,15 @@ def parse_feed(raw, src):
         stamp = parse_date(text_of(child(n, "pubDate", "published", "updated", "date")))
         snippet = text_of(child(n, "description", "summary", "content"))[:SNIPPET_CHARS]
 
+        # Google News descriptions are usually the headline with the publisher's
+        # name tacked on the end. That name is not part of the story, and it was
+        # being read as geography: "The Guardian Nigeria News" placed a piece
+        # about UK social mobility in Nigeria. Strip the publisher before the
+        # text is ever classified or placed.
+        for tail in (outlet, src["name"].replace("Google News \u00b7 ", "")):
+            if tail and len(tail) > 3 and snippet.endswith(tail):
+                snippet = snippet[: -len(tail)].strip(" -\u2013\u2014\u00b7|,")
+
         out.append({
             "t": title,
             "u": link,
@@ -408,7 +417,7 @@ GEO3 = [
      ("ua","Ukraine",["ukraine","crimean tatars","krym"]),
      ("ru","Russia (European)",["russia","russian federation"]),
      ("eu","European Union",["european union","european commission","brussels"]),
-     ("uk","United Kingdom",["united kingdom","britain","scotland","wales"]),
+     ("uk","United Kingdom",["united kingdom","britain","scotland","wales","england","u.k.","uk"]),
      ("es","Spain",["spain","spanish"]),
      ("fr","France",["france","french"]),
      ("de","Germany",["germany","german"]),
@@ -594,7 +603,13 @@ TOPICS = [
     ]),
     ("accredited", "Private markets and who is allowed in", [
         ("accredited investor", []), ("qualified investor", []),
-        ("club deal", []), ("private placement", []),
+        ("club deal", []),
+        # "private placement" on its own is ordinary corporate financing news —
+        # a refinery raising $2.5bn is not a story about who is allowed to
+        # invest. It has to be about the access, not the deal.
+        ("private placement", ["accredited", "retail", "wealthy", "high net worth",
+                               "institutional only", "excluded", "barred", "threshold",
+                               "who can invest", "ordinary investors"]),
         ("minimum investment", ["threshold", "raised", "barrier", "million"]),
         ("net worth requirement", []), ("wealth threshold", ["investor", "fund", "access"]),
         ("retail access", ["private", "restricted", "barred", "opened", "denied"]),
@@ -656,6 +671,12 @@ BLOCK = [
     "credit default swap", "notional value", "clearing house", "stress test",
     "share buyback", "carried interest", "step-up basis", "volcker rule",
     "basel iii", "dodd-frank", "too big to fail", "bailout package",
+    # corporate financing announcements: a company raising money is not a story
+    # about who is allowed to invest, however the round is structured
+    "secures private placement", "closes private placement", "announces private placement",
+    "completes private placement", "leads investment into", "catalytic investment",
+    "project finance", "infrastructure investment into", "series a", "series b",
+    "funding round", "raises $", "raises us$", "oversubscribed",
     # entertainment
     "film review", "video game", "reality show", "celebrity net worth",
 ]
