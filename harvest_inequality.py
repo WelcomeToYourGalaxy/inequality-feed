@@ -43,13 +43,27 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 
+# The shared gazetteer. Placement used to be each wire's own short country
+# table, which put most of every wire in a counter marked "unplaced"; this is
+# the fleet's common one, and it is optional at import so a harvest still runs
+# if the data file has not been fetched yet.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    import galaxy_places
+    _GAZETTEER = True
+except Exception as _exc:                       # noqa: BLE001
+    print("  ! gazetteer unavailable (%s); falling back to the local table"
+          % _exc, file=sys.stderr)
+    galaxy_places = None
+    _GAZETTEER = False
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 SOURCES_PATH = os.path.join(HERE, "sources_inequality.json")
 OUT_PATH = os.path.join(HERE, "wire_inequality.json")
 
 RETAIN_DAYS = 45
 MAX_ITEMS = 1200
-WORKERS = 10         # a few hundred wires now
+WORKERS = 14         # 26 languages, each asked in its own
 NOTABLE_SCORE = 3       # at or above this a story is marked as consequential
 
 # --------------------------------------------------------------------------
@@ -73,9 +87,24 @@ def build_gnews_url(loc):
     return ("https://news.google.com/rss/search?q=" + urllib.parse.quote(q) +
             "&hl=" + loc["hl"] + "&gl=" + loc["gl"] + "&ceid=" + loc["ceid"])
 
+READ_BUDGET_MIN = 35          # minutes spent reading wires
+
+# The wall-clock budget for reading wires. Past it the remaining sources are
+# recorded unreachable and the harvest finishes on what it has, because the
+# wire is only written at the end of run() and a job killed by the workflow
+# timeout commits nothing at all — which is how a feed gets stuck stale.
+DEADLINE = None
+
+
+def out_of_time():
+    return DEADLINE is not None and time.monotonic() > DEADLINE
+
+
 def fetch(url, tries=3):
     last = None
     for attempt in range(tries):
+        if out_of_time():
+            return None
         try:
             req = urllib.request.Request(url, headers={
                 "User-Agent": USER_AGENT,
@@ -88,6 +117,16 @@ def fetch(url, tries=3):
                 if resp.headers.get("Content-Encoding") == "gzip":
                     raw = gzip.GzipFile(fileobj=io.BytesIO(raw)).read()
                 return raw
+        except urllib.error.HTTPError as exc:
+            last = exc
+            # Being rate-limited or refused is an answer, not a hiccup. Trying
+            # the same query twice more against the same limiter spends eighty
+            # seconds of a worker slot to be told the same thing, and deepens
+            # the throttle for every other query in the run.
+            if exc.code in (403, 429, 451):
+                time.sleep(1.5)
+                break
+            time.sleep(1.5 * (attempt + 1))
         except Exception as exc:                       # noqa: BLE001 — report, don't crash the run
             last = exc
             time.sleep(1.5 * (attempt + 1))
@@ -720,6 +759,176 @@ DECIDED_C = _compile_all(DECIDED)
 INSTITUTIONAL_C = _compile_all(INSTITUTIONAL)
 MEASURED_C = _compile_all(MEASURED)
 PENDING_C = _compile_all(PENDING)
+# ------------------------------------------------------------------
+# The subjects, in the languages the queries now ask in.
+#
+# Built alongside the queries rather than after them: localised
+# queries against English-only subjects fetch stories the subject
+# gate then refuses, which reads as an improvement in the source
+# count and a worsening in everything else.
+# ------------------------------------------------------------------
+LOCAL_TERMS = {
+    "paygap": [
+        ("beloningsverhouding bestuurder werknemer", None), ("brecha salarial de", None),
+        ("disparidade salarial de", None), ("divario retributivo di", None),
+        ("gender pay gap", None), ("loonkloof rapport", None),
+        ("luka płacowa raport", None), ("lönegap mellan könen", None),
+        ("rapporto tra stipendio", None), ("ratio salarial del", None),
+        ("rácio salarial do", None), ("vd-lön i förhållande", None),
+        ("verhältnis vorstandsgehalt beschäftigte", None), ("wynagrodzenie prezesa a", None),
+        ("écart de rémunération", None), ("écart salarial femmes-hommes", None),
+        ("гендерный разрыв в", None), ("зарплата гендиректора и", None),
+        ("فجوة الأجور بين", None), ("نسبة أجر الرئيس", None),
+        ("役員報酬 従業員 比率", None), ("性别薪酬差距 报告", None),
+        ("男女賃金格差 報告", None), ("高管薪酬 员工 倍数", None),
+        ("성별 임금 격차", None), ("임원 보수 직원", None),
+    ],
+    "services": [
+        ("cortes nos serviços", None), ("coupes dans les", None),
+        ("crise da habitação", None), ("crise du logement", None),
+        ("crisi abitativa", None), ("crisis de vivienda", None),
+        ("desigualdad en el", None), ("desigualdade no acesso", None),
+        ("disuguaglianza accesso alle", None), ("inégalités d'accès aux", None),
+        ("kamu hizmetlerinde kesinti", None), ("ketimpangan akses kesehatan", None),
+        ("konut krizi", None), ("krisis perumahan", None),
+        ("kürzungen öffentliche dienste", None), ("pemangkasan layanan publik", None),
+        ("recortes en servicios", None), ("sağlığa erişimde eşitsizlik", None),
+        ("tagli ai servizi", None), ("ungleicher zugang gesundheit", None),
+        ("wohnungskrise", None), ("ανισότητα πρόσβασης στην", None),
+        ("περικοπές δημόσιων υπηρεσιών", None), ("жилищный кризис", None),
+        ("неравный доступ к", None), ("сокращение социальных услуг", None),
+        ("住宅費 高騰", None), ("住房 危机", None),
+        ("公共サービス 削減", None), ("公共服务 削减", None),
+        ("医疗可及性 不平等", None), ("医療アクセス 格差", None),
+        ("공공서비스 축소", None), ("의료 접근성 격차", None),
+        ("주거비 위기", None),
+    ],
+    "taxation": [
+        ("belastingontwijking multinational", None), ("elisão fiscal multinacional", None),
+        ("elusione fiscale multinazionali", None), ("elusión fiscal multinacional", None),
+        ("filtración offshore", None), ("fuga offshore", None),
+        ("fuite offshore", None), ("förmögenhetsskatt förslag", None),
+        ("imposto sobre a", None), ("impuesto a la", None),
+        ("impôt sur la", None), ("offshore-leak", None),
+        ("pajak kekayaan usulan", None), ("patrimoniale proposta", None),
+        ("penghindaran pajak perusahaan", None), ("podatek majątkowy propozycja", None),
+        ("servet vergisi önerisi", None), ("skatteflykt multinationella", None),
+        ("steuervermeidung konzern", None), ("unikanie opodatkowania korporacje", None),
+        ("vergiden kaçınma çok", None), ("vermogensbelasting voorstel", None),
+        ("vermögensteuer vorschlag", None), ("évasion fiscale multinationale", None),
+        ("φοροαποφυγή πολυεθνικών", None), ("φόρος πλούτου πρόταση", None),
+        ("налог на богатство", None), ("уклонение от налогов", None),
+        ("التهرب الضريبي شركات", None), ("ضريبة الثروة اقتراح", None),
+        ("オフショア 流出", None), ("多国籍企業 租税回避", None),
+        ("富裕税 提案", None), ("离岸 泄露", None),
+        ("财富税 提案", None), ("跨国公司 避税", None),
+        ("다국적기업 조세회피", None), ("부유세 제안", None),
+    ],
+    "wages": [
+        ("asgari ücret artışı", None), ("aumento del salario", None),
+        ("aumento do salário", None), ("baisse des salaires", None),
+        ("calo dei salari", None), ("caída de los", None),
+        ("furto di salario", None), ("hausse du salaire", None),
+        ("höjd minimilön", None), ("kenaikan upah minimum", None),
+        ("lương thực tế", None), ("mindestlohn erhöhung", None),
+        ("minimumloon verhoging", None), ("podwyżka płacy minimalnej", None),
+        ("queda dos salários", None), ("reallöhne sinken", None),
+        ("reel ücretlerde düşüş", None), ("reële lonen dalen", None),
+        ("robo de salarios", None), ("roubo salarial", None),
+        ("sjunkande reallöner", None), ("spadek płac realnych", None),
+        ("subida del salario", None), ("tăng lương tối", None),
+        ("upah riil turun", None), ("vol de salaire", None),
+        ("αύξηση κατώτατου μισθού", None), ("πτώση πραγματικών μισθών", None),
+        ("падение реальных зарплат", None), ("повышение минимальной зарплаты", None),
+        ("تراجع الأجور الحقيقية", None), ("رفع الحد الأدنى", None),
+        ("न्यूनतम मजदूरी वृद्धि", None), ("वास्तविक मजदूरी में", None),
+        ("ขึ้นค่าแรงขั้นต่ำ", None), ("ค่าจ้างที่แท้จริงลดลง", None),
+        ("实际工资 下降", None), ("実質賃金 低下", None),
+        ("最低工资 上调", None), ("最低賃金 引き上げ", None),
+        ("실질임금 하락", None), ("최저임금 인상", None),
+    ],
+    "wealth": [
+        ("concentración de la", None), ("concentration des richesses", None),
+        ("concentrazione della ricchezza", None), ("concentração da riqueza", None),
+        ("el 1% más", None), ("fortuna de los", None),
+        ("fortuna dos bilionários", None), ("fortune des milliardaires", None),
+        ("förmögenhetskoncentration rapport", None), ("kekayaan miliarder", None),
+        ("koncentracja majątku raport", None), ("konsentrasi kekayaan laporan", None),
+        ("l'1% più ricco", None), ("les 1% les", None),
+        ("majątki miliarderów", None), ("miljardärers förmögenhet", None),
+        ("milliardärsvermögen", None), ("milyarderlerin serveti", None),
+        ("o 1% mais", None), ("patrimoni dei miliardari", None),
+        ("reichstes prozent", None), ("servet yoğunlaşması rapor", None),
+        ("vermogen miljardairs", None), ("vermogensconcentratie rapport", None),
+        ("vermögenskonzentration bericht", None), ("περιουσίες δισεκατομμυριούχων", None),
+        ("συγκέντρωση πλούτου έκθεση", None), ("концентрация богатства доклад", None),
+        ("состояние миллиардеров", None), ("تركز الثروة تقرير", None),
+        ("ثروات المليارديرات", None), ("अरबपतियों की संपत्ति", None),
+        ("धन का संकेंद्रण", None), ("亿万富豪 财富 增长", None),
+        ("富の集中 報告", None), ("富裕層 資産 増加", None),
+        ("财富集中 报告", None), ("부의 집중 보고서", None),
+        ("억만장자 자산 증가", None),
+    ],
+}
+
+for _tid, _label, _terms in TOPICS:
+    _terms.extend(LOCAL_TERMS.get(_tid, []))
+
+# ------------------------------------------------------------------
+# Subjects this wire had a name for and never asked about.
+#
+# The terms below were already here and were well written; what was
+# missing was any query aimed at them, so they held zero stories
+# however much the world published. These are the phrases from the
+# queries now added, so what is fetched can be filed.
+# ------------------------------------------------------------------
+FILL_TERMS = {
+    "barriers": [
+        ("acceso al crédito", None), ("accesso al credito", None),
+        ("accès au crédit", None), ("acesso ao crédito", None),
+        ("barreiras de licenciamento", None), ("barreras de licencias", None),
+        ("barriere delle licenze", None), ("barrières des licences", None),
+        ("berufszulassung als hürde", None), ("kreditzugang verweigert geringverdiener", None),
+        ("低所得者 融資 拒否", None), ("低收入 信贷 被拒", None),
+        ("职业许可 门槛", None), ("資格制度 参入障壁", None),
+        ("저소득층 대출 거절", None), ("직업 면허 진입장벽", None),
+    ],
+    "selfsufficiency": [
+        ("autossuficiência doméstica cultivo", None), ("autosufficienza domestica coltivazione", None),
+        ("autosuffisance des ménages", None), ("autosuficiencia doméstica cultivo", None),
+        ("banco de terras", None), ("banco de tierras", None),
+        ("foncier solidaire", None), ("fondo fondiario comunitario", None),
+        ("gemeinschaftsbodenfonds", None), ("netzwerk gegenseitiger hilfe", None),
+        ("red de apoyo", None), ("rede de apoio", None),
+        ("rete di mutuo", None), ("réseau d'entraide économie", None),
+        ("selbstversorgung haushalte anbau", None), ("コミュニティ土地信託", None),
+        ("互助 网络", None), ("家庭 自给自足 种植", None),
+        ("相互扶助 ネットワーク", None), ("社区土地信托", None),
+        ("自給自足 家庭 菜園", None), ("공동체 토지 신탁", None),
+        ("상호부조 네트워크", None), ("자급자족 가정 텃밭", None),
+    ],
+}
+
+for _tid, _label, _terms in TOPICS:
+    _terms.extend(FILL_TERMS.get(_tid, []))
+
+
+# --------------------------------------------------------------------------
+# The same subjects in the languages this wire's own queries ask in, derived
+# from those queries and filed under the subject each query's label names. The
+# gate above was written in English; the queries were translated and it was
+# not, so three quarters of what the wire fetched could not be recognised once
+# it arrived. Generated — edit topics_multilingual.json, or delete the file to
+# turn this off.
+# --------------------------------------------------------------------------
+_EXTRA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "topics_multilingual.json")
+if os.path.exists(_EXTRA_PATH):
+    with open(_EXTRA_PATH, encoding="utf-8") as _fh:
+        _EXTRA = json.load(_fh)
+    TOPICS = [(tid, label, terms + [(t, g) for t, g in _EXTRA.get(tid, [])])
+              for tid, label, terms in TOPICS]
+
 TOPICS_C = [(tid, label, [(_compile(t), _compile_all(g) if g else None) for t, g in terms])
             for tid, label, terms in TOPICS]
 GEO3_C = [(rid, rlabel, [(sid, slabel, [(pid, plabel, _compile_all(terms))
@@ -1308,19 +1517,91 @@ def scene_first(text, places):
         (scene if _is_scene(text, _first_pos(text, terms.get(pid, []))) else rest).append(pid)
     return scene + rest
 
-def point_for(text, places, subs, regions):
-    """The most specific point a story resolved to: a named sub-national place
-    if there is one, otherwise the country, otherwise the subregion or region.
-    Returns (label_or_None, point_or_None)."""
+
+# --------------------------------------------------------------------------
+# The gazetteer answers with a country; this wire's taxonomy is keyed on ids
+# whose leading token is that country's ISO-2. Filing a placed story under its
+# region is therefore a lookup, not a guess. Where a country is split across
+# several places, only region and subregion are filled: which of the places a
+# story belongs to is a question the country code cannot answer.
+# --------------------------------------------------------------------------
+ISO_REGION = {}
+for _rid, _rlabel, _subs in GEO3:
+    for _sid, _slabel, _places in _subs:
+        for _pid, _plabel, _terms in _places:
+            _iso = _pid.split("-")[0].lower()
+            if len(_iso) == 2:
+                ISO_REGION.setdefault(_iso, (_rid, _sid))
+
+
+def file_by_country(row, cc):
+    """Put a gazetteer-placed story in its region, if the wire has one."""
+    if not cc:
+        return
+    hit = ISO_REGION.get(str(cc).lower())
+    if not hit:
+        return
+    rid, sid = hit
+    if not row.get("w") or row["w"] == ["unlocated"]:
+        row["w"] = [rid]
+    if not row.get("sr") or row["sr"] == ["unlocated"]:
+        row["sr"] = [sid]
+
+
+
+def country_for(raw, locale=None):
+    """The ISO-2 the placement resolved to, or None."""
+    if not _GAZETTEER:
+        return None
+    try:
+        return galaxy_places.resolve_full(raw, locale)[4]
+    except Exception:
+        return None
+
+
+def point_for(text, places, subs, regions, locale=None, raw=None):
+    """The most specific point a story resolved to.
+
+    The order is deliberate. This wire's own curated table goes first: it holds
+    the places this subject actually turns up and the country list it was
+    written against, and it beats a general gazetteer on its own ground. The
+    shared gazetteer follows but only overrides at the settlement level, so a
+    headline naming Kharkiv pins on Kharkiv rather than the middle of Ukraine,
+    while a country reading from this wire's own table still wins over a
+    country reading from the gazetteer. Then the bodies that stand for a
+    jurisdiction without naming it — EFSA is a European story, ANVISA a
+    Brazilian one. Last, and weakest, the country the source itself reports
+    from.
+
+    Returns (label_or_None, point_or_None, approx). approx is True only for
+    that last case, where nothing in the story placed it and the point is the
+    reporting locale rather than the scene. The page draws those hollow.
+    """
     label, point = precise_for(text)
     if point:
-        return label, point
+        return label, point, False
+
+    glabel, gpoint, grank = None, None, -1
+    if _GAZETTEER:
+        glabel, gpoint, grank, _approx = galaxy_places.resolve_ranked(raw or text)
+        if grank == 3:
+            return glabel, gpoint, False
+
     places = scene_first(text, places)
     for level in (places, subs, regions):
         for pid in level:
             if pid in COORDS:
-                return None, COORDS[pid]
-    return None, None
+                return None, COORDS[pid], False
+
+    if gpoint:
+        return glabel, gpoint, False
+
+    if _GAZETTEER and locale:
+        llabel, lpoint, _lrank, lapprox = galaxy_places.resolve_ranked("", locale)
+        if lpoint:
+            return llabel, lpoint, lapprox
+
+    return None, None, False
 
 
 def load_sources():
@@ -1334,12 +1615,15 @@ def load_sources():
         for loc in cfg.get(block, []):
             srcs.append({"name": prefix + loc["label"], "lang": loc["lang"],
                          "standing": loc["standing"], "region": loc["standing"],
-                         "kind": "news", "url": build_gnews_url(loc)})
+                         "kind": "news", "url": build_gnews_url(loc), "gl": loc.get("gl")})
     return srcs, cfg
 
 
 def run(dry_run=False, fixtures=None):
+    global DEADLINE
     sources, cfg = load_sources()
+    if not fixtures:
+        DEADLINE = time.monotonic() + READ_BUDGET_MIN * 60
     print("Reading %d wires…" % len(sources))
 
     def read(src):
@@ -1399,7 +1683,12 @@ def run(dry_run=False, fixtures=None):
                 row["w"] = regions
                 row["sr"] = subs
                 row["pl"] = places
-                row["pn"], row["ll"] = point_for(text, places, subs, regions)
+                row["gl"] = src.get("gl")
+                _raw = (row["t"] or "") + " " + (row.get("s") or "")
+                row["pn"], row["ll"], row["pa"] = point_for(
+                    text, places, subs, regions, src.get("gl"), _raw)
+                if row["ll"]:
+                    file_by_country(row, country_for(_raw, src.get("gl")))
                 row["p"] = total
                 row["y"] = reasons
                 row["st"] = src["standing"]
@@ -1412,8 +1701,23 @@ def run(dry_run=False, fixtures=None):
 
     fresh_urls = {canon_url(i["u"]) for i in items}
     for row in previous:
-        if "x" in row:
-            absorb(row)
+        if "x" not in row:
+            continue
+        # A retained story is placed again rather than carried forward with the
+        # answer it happened to get the day it was first read. RETAIN_DAYS is
+        # 45, so without this a change to the placement layer takes a month and
+        # a half to reach the map, and a story never re-fetched keeps its first
+        # answer for good. Rows already holding a point resolved from their own
+        # text are left alone; only the unplaced and the source-country
+        # approximations are reconsidered.
+        if not row.get("ll") or row.get("pa"):
+            _raw = ((row.get("t") or "") + " " + (row.get("s") or ""))
+            row["pn"], row["ll"], row["pa"] = point_for(
+                _raw.lower(), row.get("pl") or [], row.get("sr") or [],
+                row.get("w") or [], row.get("gl"), _raw)
+            if row["ll"]:
+                file_by_country(row, country_for(_raw, row.get("gl")))
+        absorb(row)
 
     cutoff = int(time.time() * 1000) - RETAIN_DAYS * 86400000
     items = [i for i in items if (i.get("d") or cutoff + 1) >= cutoff]

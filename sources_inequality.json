@@ -1,1558 +1,1856 @@
 {
-  "_note": [
-    "Sources for the inequality wire.",
-    "",
-    "direct: institutional and research feeds. Those carried over from sibling",
-    "  repos are already proven working; the rest follow each body's documented",
-    "  feed path. Any that does not answer is reported as unreachable in the status",
-    "  line and in Sources & coverage rather than being hidden.",
-    "",
-    "gnews: Google News locale searches. The harvester builds the URL from",
-    "  hl / gl / ceid. Twenty-four queries rotate across 46 locales so the whole",
-    "  subject range is covered rather than one theme repeated.",
-    "",
-    "events: subject searches for recurring publications and enforcement actions.",
-    "",
-    "standing is provenance, not importance:",
-    "  official  regulators, central banks, courts, the IMF, World Bank, OECD, BIS",
-    "  research  institutes and inequality data",
-    "  press     general news across the locales",
-    "  rights    campaigning and corporate-accountability organisations"
-  ],
-  "direct": [
-    {
-      "name": "IMF",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.imf.org/en/News/RSS?language=eng"
-    },
-    {
-      "name": "World Bank",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.worldbank.org/en/news/all?format=rss"
-    },
-    {
-      "name": "OECD",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.oecd.org/newsroom/index.xml"
-    },
-    {
-      "name": "UNCTAD",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://unctad.org/rss.xml"
-    },
-    {
-      "name": "Bank for International Settlements",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.bis.org/rss/whatsnew.xml"
-    },
-    {
-      "name": "Federal Reserve",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.federalreserve.gov/feeds/press_all.xml"
-    },
-    {
-      "name": "European Central Bank",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.ecb.europa.eu/rss/press.html"
-    },
-    {
-      "name": "Bank of England",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.bankofengland.co.uk/rss/news"
-    },
-    {
-      "name": "Financial Stability Board",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.fsb.org/feed/"
-    },
-    {
-      "name": "Tax Justice Network",
-      "lang": "en",
-      "standing": "research",
-      "url": "https://taxjustice.net/feed/"
-    },
-    {
-      "name": "Peterson Institute",
-      "lang": "en",
-      "standing": "research",
-      "url": "https://www.piie.com/rss.xml"
-    },
-    {
-      "name": "ODI",
-      "lang": "en",
-      "standing": "research",
-      "url": "https://odi.org/en/feed/"
-    },
-    {
-      "name": "CEPR",
-      "lang": "en",
-      "standing": "research",
-      "url": "https://cepr.org/rss.xml"
-    },
-    {
-      "name": "AidData",
-      "lang": "en",
-      "standing": "research",
-      "url": "https://www.aiddata.org/rss"
-    },
-    {
-      "name": "Transnational Institute",
-      "lang": "en",
-      "standing": "rights",
-      "url": "https://www.tni.org/en/rss.xml"
-    },
-    {
-      "name": "Corporate Europe Observatory",
-      "lang": "en",
-      "standing": "rights",
-      "url": "https://corporateeurope.org/en/rss.xml"
-    },
-    {
-      "name": "Global Witness",
-      "lang": "en",
-      "standing": "rights",
-      "url": "https://www.globalwitness.org/en/rss/"
-    },
-    {
-      "name": "Financial Transparency Coalition",
-      "lang": "en",
-      "standing": "rights",
-      "url": "https://financialtransparency.org/feed/"
-    },
-    {
-      "name": "Debt Justice",
-      "lang": "en",
-      "standing": "rights",
-      "url": "https://debtjustice.org.uk/feed"
-    },
-    {
-      "name": "Eurodad",
-      "lang": "en",
-      "standing": "rights",
-      "url": "https://www.eurodad.org/rss.xml"
-    },
-    {
-      "name": "Public Citizen · Global Trade Watch",
-      "lang": "en",
-      "standing": "rights",
-      "url": "https://www.citizen.org/feed/"
-    },
-    {
-      "name": "Bretton Woods Project",
-      "lang": "en",
-      "standing": "rights",
-      "url": "https://www.brettonwoodsproject.org/feed/"
-    },
-    {
-      "name": "Transparency International",
-      "lang": "en",
-      "standing": "rights",
-      "url": "https://www.transparency.org/en/rss"
-    },
-    {
-      "name": "Human Rights Watch",
-      "lang": "en",
-      "standing": "rights",
-      "url": "https://www.hrw.org/rss/news"
-    }
-  ],
-  "gnews": [
-    {
-      "label": "English (US) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"wealth inequality\" OR \"income inequality\" OR \"wealth gap\""
-    },
-    {
-      "label": "English (US) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"wage stagnation\" OR \"executive pay\" OR \"living wage\" OR \"labour share\""
-    },
-    {
-      "label": "English (US) 3",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"cost of living\" OR \"food insecurity\" OR \"fuel poverty\" OR \"food bank\""
-    },
-    {
-      "label": "English (UK) 4",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en-GB",
-      "query": "\"social mobility\" OR \"intergenerational\" wealth OR mobility"
-    },
-    {
-      "label": "English (UK) 5",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en-GB",
-      "query": "\"tax avoidance\" OR \"tax haven\" OR \"wealth tax\" OR \"offshore\" wealth"
-    },
-    {
-      "label": "English (UK) 6",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en-GB",
-      "query": "\"gender pay gap\" OR \"pay gap\" report OR \"labour market discrimination\""
-    },
-    {
-      "label": "English (India) 7",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-IN",
-      "gl": "IN",
-      "ceid": "IN:en",
-      "query": "\"regional inequality\" OR \"left behind\" region OR \"infrastructure gap\""
-    },
-    {
-      "label": "English (India) 8",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-IN",
-      "gl": "IN",
-      "ceid": "IN:en",
-      "query": "\"access to credit\" OR redlining OR \"predatory lending\" OR unbanked"
-    },
-    {
-      "label": "English (India) 9",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-IN",
-      "gl": "IN",
-      "ceid": "IN:en",
-      "query": "\"high-frequency trading\" OR \"front running\" OR \"latency arbitrage\""
-    },
-    {
-      "label": "English (Nigeria) 10",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-NG",
-      "gl": "NG",
-      "ceid": "NG:en",
-      "query": "\"insider trading\" OR \"market abuse\" OR \"market manipulation\""
-    },
-    {
-      "label": "English (Nigeria) 11",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-NG",
-      "gl": "NG",
-      "ceid": "NG:en",
-      "query": "\"financial regulation\" rollback OR deregulation OR \"regulatory capture\""
-    },
-    {
-      "label": "English (Nigeria) 12",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-NG",
-      "gl": "NG",
-      "ceid": "NG:en",
-      "query": "\"dark pool\" OR \"payment for order flow\" OR \"off-exchange\" trading"
-    },
-    {
-      "label": "English (South Africa) 13",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-ZA",
-      "gl": "ZA",
-      "ceid": "ZA:en",
-      "query": "BlackRock OR Vanguard OR \"State Street\" stake OR ownership OR voting"
-    },
-    {
-      "label": "English (South Africa) 14",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-ZA",
-      "gl": "ZA",
-      "ceid": "ZA:en",
-      "query": "\"private equity\" buyout OR delisting OR \"take-private\" OR \"private credit\""
-    },
-    {
-      "label": "English (South Africa) 15",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-ZA",
-      "gl": "ZA",
-      "ceid": "ZA:en",
-      "query": "\"accredited investor\" OR \"private placement\" OR \"club deal\""
-    },
-    {
-      "label": "English (Australia) 16",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-AU",
-      "gl": "AU",
-      "ceid": "AU:en",
-      "query": "\"climate disclosure\" OR \"ESG\" rules OR \"scope 3\" reporting"
-    },
-    {
-      "label": "English (Australia) 17",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-AU",
-      "gl": "AU",
-      "ceid": "AU:en",
-      "query": "\"too big to fail\" OR \"systemic risk\" OR \"bank merger\" OR bailout"
-    },
-    {
-      "label": "English (Australia) 18",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-AU",
-      "gl": "AU",
-      "ceid": "AU:en",
-      "query": "derivatives OR \"credit default swap\" OR \"shadow banking\" OR \"commodity speculation\""
-    },
-    {
-      "label": "English (Kenya) 19",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-KE",
-      "gl": "KE",
-      "ceid": "KE:en",
-      "query": "\"pension fund\" holdings OR fees OR \"asset manager\" stewardship"
-    },
-    {
-      "label": "English (Kenya) 20",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-KE",
-      "gl": "KE",
-      "ceid": "KE:en",
-      "query": "\"share buyback\" OR \"carried interest\" OR \"shareholder primacy\""
-    },
-    {
-      "label": "English (Kenya) 21",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-KE",
-      "gl": "KE",
-      "ceid": "KE:en",
-      "query": "\"market crash\" OR \"financial crisis\" OR bubble warning"
-    },
-    {
-      "label": "English (Philippines) 22",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-PH",
-      "gl": "PH",
-      "ceid": "PH:en",
-      "query": "lobbying finance OR \"dark money\" OR \"campaign finance\" OR \"revolving door\""
-    },
-    {
-      "label": "English (Philippines) 23",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-PH",
-      "gl": "PH",
-      "ceid": "PH:en",
-      "query": "austerity OR \"public services\" cuts OR \"user fees\" health"
-    },
-    {
-      "label": "English (Philippines) 24",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-PH",
-      "gl": "PH",
-      "ceid": "PH:en",
-      "query": "\"self-sufficiency\" OR \"food sovereignty\" OR commons enclosure"
-    },
-    {
-      "label": "Spanish (Spain) 25",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es",
-      "gl": "ES",
-      "ceid": "ES:es",
-      "query": "\"wealth inequality\" OR \"income inequality\" OR \"wealth gap\""
-    },
-    {
-      "label": "Spanish (Spain) 26",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es",
-      "gl": "ES",
-      "ceid": "ES:es",
-      "query": "\"wage stagnation\" OR \"executive pay\" OR \"living wage\" OR \"labour share\""
-    },
-    {
-      "label": "Spanish (Spain) 27",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es",
-      "gl": "ES",
-      "ceid": "ES:es",
-      "query": "\"cost of living\" OR \"food insecurity\" OR \"fuel poverty\" OR \"food bank\""
-    },
-    {
-      "label": "Spanish (Mexico) 28",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "MX",
-      "ceid": "MX:es-419",
-      "query": "\"social mobility\" OR \"intergenerational\" wealth OR mobility"
-    },
-    {
-      "label": "Spanish (Mexico) 29",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "MX",
-      "ceid": "MX:es-419",
-      "query": "\"tax avoidance\" OR \"tax haven\" OR \"wealth tax\" OR \"offshore\" wealth"
-    },
-    {
-      "label": "Spanish (Mexico) 30",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "MX",
-      "ceid": "MX:es-419",
-      "query": "\"gender pay gap\" OR \"pay gap\" report OR \"labour market discrimination\""
-    },
-    {
-      "label": "Spanish (Argentina) 31",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "AR",
-      "ceid": "AR:es-419",
-      "query": "\"regional inequality\" OR \"left behind\" region OR \"infrastructure gap\""
-    },
-    {
-      "label": "Spanish (Argentina) 32",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "AR",
-      "ceid": "AR:es-419",
-      "query": "\"access to credit\" OR redlining OR \"predatory lending\" OR unbanked"
-    },
-    {
-      "label": "Spanish (Argentina) 33",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "AR",
-      "ceid": "AR:es-419",
-      "query": "\"high-frequency trading\" OR \"front running\" OR \"latency arbitrage\""
-    },
-    {
-      "label": "Spanish (Colombia) 34",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "CO",
-      "ceid": "CO:es-419",
-      "query": "\"insider trading\" OR \"market abuse\" OR \"market manipulation\""
-    },
-    {
-      "label": "Spanish (Colombia) 35",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "CO",
-      "ceid": "CO:es-419",
-      "query": "\"financial regulation\" rollback OR deregulation OR \"regulatory capture\""
-    },
-    {
-      "label": "Spanish (Colombia) 36",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "CO",
-      "ceid": "CO:es-419",
-      "query": "\"dark pool\" OR \"payment for order flow\" OR \"off-exchange\" trading"
-    },
-    {
-      "label": "French (France) 37",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "FR",
-      "ceid": "FR:fr",
-      "query": "BlackRock OR Vanguard OR \"State Street\" stake OR ownership OR voting"
-    },
-    {
-      "label": "French (France) 38",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "FR",
-      "ceid": "FR:fr",
-      "query": "\"private equity\" buyout OR delisting OR \"take-private\" OR \"private credit\""
-    },
-    {
-      "label": "French (France) 39",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "FR",
-      "ceid": "FR:fr",
-      "query": "\"accredited investor\" OR \"private placement\" OR \"club deal\""
-    },
-    {
-      "label": "French (Senegal) 40",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "SN",
-      "ceid": "SN:fr",
-      "query": "\"climate disclosure\" OR \"ESG\" rules OR \"scope 3\" reporting"
-    },
-    {
-      "label": "French (Senegal) 41",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "SN",
-      "ceid": "SN:fr",
-      "query": "\"too big to fail\" OR \"systemic risk\" OR \"bank merger\" OR bailout"
-    },
-    {
-      "label": "French (Senegal) 42",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "SN",
-      "ceid": "SN:fr",
-      "query": "derivatives OR \"credit default swap\" OR \"shadow banking\" OR \"commodity speculation\""
-    },
-    {
-      "label": "French (Canada) 43",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "CA",
-      "ceid": "CA:fr",
-      "query": "\"pension fund\" holdings OR fees OR \"asset manager\" stewardship"
-    },
-    {
-      "label": "French (Canada) 44",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "CA",
-      "ceid": "CA:fr",
-      "query": "\"share buyback\" OR \"carried interest\" OR \"shareholder primacy\""
-    },
-    {
-      "label": "French (Canada) 45",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "CA",
-      "ceid": "CA:fr",
-      "query": "\"market crash\" OR \"financial crisis\" OR bubble warning"
-    },
-    {
-      "label": "Portuguese (Brazil) 46",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-BR",
-      "gl": "BR",
-      "ceid": "BR:pt-419",
-      "query": "lobbying finance OR \"dark money\" OR \"campaign finance\" OR \"revolving door\""
-    },
-    {
-      "label": "Portuguese (Brazil) 47",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-BR",
-      "gl": "BR",
-      "ceid": "BR:pt-419",
-      "query": "austerity OR \"public services\" cuts OR \"user fees\" health"
-    },
-    {
-      "label": "Portuguese (Brazil) 48",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-BR",
-      "gl": "BR",
-      "ceid": "BR:pt-419",
-      "query": "\"self-sufficiency\" OR \"food sovereignty\" OR commons enclosure"
-    },
-    {
-      "label": "Portuguese (Portugal) 49",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-PT",
-      "gl": "PT",
-      "ceid": "PT:pt-150",
-      "query": "\"wealth inequality\" OR \"income inequality\" OR \"wealth gap\""
-    },
-    {
-      "label": "Portuguese (Portugal) 50",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-PT",
-      "gl": "PT",
-      "ceid": "PT:pt-150",
-      "query": "\"wage stagnation\" OR \"executive pay\" OR \"living wage\" OR \"labour share\""
-    },
-    {
-      "label": "Portuguese (Portugal) 51",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-PT",
-      "gl": "PT",
-      "ceid": "PT:pt-150",
-      "query": "\"cost of living\" OR \"food insecurity\" OR \"fuel poverty\" OR \"food bank\""
-    },
-    {
-      "label": "Portuguese (Angola) 52",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-PT",
-      "gl": "AO",
-      "ceid": "AO:pt-150",
-      "query": "\"social mobility\" OR \"intergenerational\" wealth OR mobility"
-    },
-    {
-      "label": "Portuguese (Angola) 53",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-PT",
-      "gl": "AO",
-      "ceid": "AO:pt-150",
-      "query": "\"tax avoidance\" OR \"tax haven\" OR \"wealth tax\" OR \"offshore\" wealth"
-    },
-    {
-      "label": "Portuguese (Angola) 54",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-PT",
-      "gl": "AO",
-      "ceid": "AO:pt-150",
-      "query": "\"gender pay gap\" OR \"pay gap\" report OR \"labour market discrimination\""
-    },
-    {
-      "label": "German (Germany) 55",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "DE",
-      "ceid": "DE:de",
-      "query": "\"regional inequality\" OR \"left behind\" region OR \"infrastructure gap\""
-    },
-    {
-      "label": "German (Germany) 56",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "DE",
-      "ceid": "DE:de",
-      "query": "\"access to credit\" OR redlining OR \"predatory lending\" OR unbanked"
-    },
-    {
-      "label": "German (Germany) 57",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "DE",
-      "ceid": "DE:de",
-      "query": "\"high-frequency trading\" OR \"front running\" OR \"latency arbitrage\""
-    },
-    {
-      "label": "German (Austria) 58",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "AT",
-      "ceid": "AT:de",
-      "query": "\"insider trading\" OR \"market abuse\" OR \"market manipulation\""
-    },
-    {
-      "label": "German (Austria) 59",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "AT",
-      "ceid": "AT:de",
-      "query": "\"financial regulation\" rollback OR deregulation OR \"regulatory capture\""
-    },
-    {
-      "label": "German (Austria) 60",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "AT",
-      "ceid": "AT:de",
-      "query": "\"dark pool\" OR \"payment for order flow\" OR \"off-exchange\" trading"
-    },
-    {
-      "label": "Russian (Russia) 61",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "RU",
-      "ceid": "RU:ru",
-      "query": "BlackRock OR Vanguard OR \"State Street\" stake OR ownership OR voting"
-    },
-    {
-      "label": "Russian (Russia) 62",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "RU",
-      "ceid": "RU:ru",
-      "query": "\"private equity\" buyout OR delisting OR \"take-private\" OR \"private credit\""
-    },
-    {
-      "label": "Russian (Russia) 63",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "RU",
-      "ceid": "RU:ru",
-      "query": "\"accredited investor\" OR \"private placement\" OR \"club deal\""
-    },
-    {
-      "label": "Russian (Kazakhstan) 64",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "KZ",
-      "ceid": "KZ:ru",
-      "query": "\"climate disclosure\" OR \"ESG\" rules OR \"scope 3\" reporting"
-    },
-    {
-      "label": "Russian (Kazakhstan) 65",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "KZ",
-      "ceid": "KZ:ru",
-      "query": "\"too big to fail\" OR \"systemic risk\" OR \"bank merger\" OR bailout"
-    },
-    {
-      "label": "Russian (Kazakhstan) 66",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "KZ",
-      "ceid": "KZ:ru",
-      "query": "derivatives OR \"credit default swap\" OR \"shadow banking\" OR \"commodity speculation\""
-    },
-    {
-      "label": "Arabic (Egypt) 67",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "EG",
-      "ceid": "EG:ar",
-      "query": "\"pension fund\" holdings OR fees OR \"asset manager\" stewardship"
-    },
-    {
-      "label": "Arabic (Egypt) 68",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "EG",
-      "ceid": "EG:ar",
-      "query": "\"share buyback\" OR \"carried interest\" OR \"shareholder primacy\""
-    },
-    {
-      "label": "Arabic (Egypt) 69",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "EG",
-      "ceid": "EG:ar",
-      "query": "\"market crash\" OR \"financial crisis\" OR bubble warning"
-    },
-    {
-      "label": "Arabic (UAE) 70",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "AE",
-      "ceid": "AE:ar",
-      "query": "lobbying finance OR \"dark money\" OR \"campaign finance\" OR \"revolving door\""
-    },
-    {
-      "label": "Arabic (UAE) 71",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "AE",
-      "ceid": "AE:ar",
-      "query": "austerity OR \"public services\" cuts OR \"user fees\" health"
-    },
-    {
-      "label": "Arabic (UAE) 72",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "AE",
-      "ceid": "AE:ar",
-      "query": "\"self-sufficiency\" OR \"food sovereignty\" OR commons enclosure"
-    },
-    {
-      "label": "Arabic (Lebanon) 73",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "LB",
-      "ceid": "LB:ar",
-      "query": "\"wealth inequality\" OR \"income inequality\" OR \"wealth gap\""
-    },
-    {
-      "label": "Arabic (Lebanon) 74",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "LB",
-      "ceid": "LB:ar",
-      "query": "\"wage stagnation\" OR \"executive pay\" OR \"living wage\" OR \"labour share\""
-    },
-    {
-      "label": "Arabic (Lebanon) 75",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "LB",
-      "ceid": "LB:ar",
-      "query": "\"cost of living\" OR \"food insecurity\" OR \"fuel poverty\" OR \"food bank\""
-    },
-    {
-      "label": "Chinese (Mainland) 76",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-CN",
-      "gl": "CN",
-      "ceid": "CN:zh-Hans",
-      "query": "\"social mobility\" OR \"intergenerational\" wealth OR mobility"
-    },
-    {
-      "label": "Chinese (Mainland) 77",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-CN",
-      "gl": "CN",
-      "ceid": "CN:zh-Hans",
-      "query": "\"tax avoidance\" OR \"tax haven\" OR \"wealth tax\" OR \"offshore\" wealth"
-    },
-    {
-      "label": "Chinese (Mainland) 78",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-CN",
-      "gl": "CN",
-      "ceid": "CN:zh-Hans",
-      "query": "\"gender pay gap\" OR \"pay gap\" report OR \"labour market discrimination\""
-    },
-    {
-      "label": "Chinese (Taiwan) 79",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-TW",
-      "gl": "TW",
-      "ceid": "TW:zh-Hant",
-      "query": "\"regional inequality\" OR \"left behind\" region OR \"infrastructure gap\""
-    },
-    {
-      "label": "Chinese (Taiwan) 80",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-TW",
-      "gl": "TW",
-      "ceid": "TW:zh-Hant",
-      "query": "\"access to credit\" OR redlining OR \"predatory lending\" OR unbanked"
-    },
-    {
-      "label": "Chinese (Taiwan) 81",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-TW",
-      "gl": "TW",
-      "ceid": "TW:zh-Hant",
-      "query": "\"high-frequency trading\" OR \"front running\" OR \"latency arbitrage\""
-    },
-    {
-      "label": "Chinese (Hong Kong) 82",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-HK",
-      "gl": "HK",
-      "ceid": "HK:zh-Hant",
-      "query": "\"insider trading\" OR \"market abuse\" OR \"market manipulation\""
-    },
-    {
-      "label": "Chinese (Hong Kong) 83",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-HK",
-      "gl": "HK",
-      "ceid": "HK:zh-Hant",
-      "query": "\"financial regulation\" rollback OR deregulation OR \"regulatory capture\""
-    },
-    {
-      "label": "Chinese (Hong Kong) 84",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-HK",
-      "gl": "HK",
-      "ceid": "HK:zh-Hant",
-      "query": "\"dark pool\" OR \"payment for order flow\" OR \"off-exchange\" trading"
-    },
-    {
-      "label": "Hindi (India) 85",
-      "lang": "hi",
-      "standing": "press",
-      "hl": "hi",
-      "gl": "IN",
-      "ceid": "IN:hi",
-      "query": "BlackRock OR Vanguard OR \"State Street\" stake OR ownership OR voting"
-    },
-    {
-      "label": "Hindi (India) 86",
-      "lang": "hi",
-      "standing": "press",
-      "hl": "hi",
-      "gl": "IN",
-      "ceid": "IN:hi",
-      "query": "\"private equity\" buyout OR delisting OR \"take-private\" OR \"private credit\""
-    },
-    {
-      "label": "Hindi (India) 87",
-      "lang": "hi",
-      "standing": "press",
-      "hl": "hi",
-      "gl": "IN",
-      "ceid": "IN:hi",
-      "query": "\"accredited investor\" OR \"private placement\" OR \"club deal\""
-    },
-    {
-      "label": "Bengali (Bangladesh) 88",
-      "lang": "bn",
-      "standing": "press",
-      "hl": "bn",
-      "gl": "BD",
-      "ceid": "BD:bn",
-      "query": "\"climate disclosure\" OR \"ESG\" rules OR \"scope 3\" reporting"
-    },
-    {
-      "label": "Bengali (Bangladesh) 89",
-      "lang": "bn",
-      "standing": "press",
-      "hl": "bn",
-      "gl": "BD",
-      "ceid": "BD:bn",
-      "query": "\"too big to fail\" OR \"systemic risk\" OR \"bank merger\" OR bailout"
-    },
-    {
-      "label": "Bengali (Bangladesh) 90",
-      "lang": "bn",
-      "standing": "press",
-      "hl": "bn",
-      "gl": "BD",
-      "ceid": "BD:bn",
-      "query": "derivatives OR \"credit default swap\" OR \"shadow banking\" OR \"commodity speculation\""
-    },
-    {
-      "label": "Indonesian 91",
-      "lang": "id",
-      "standing": "press",
-      "hl": "id",
-      "gl": "ID",
-      "ceid": "ID:id",
-      "query": "\"pension fund\" holdings OR fees OR \"asset manager\" stewardship"
-    },
-    {
-      "label": "Indonesian 92",
-      "lang": "id",
-      "standing": "press",
-      "hl": "id",
-      "gl": "ID",
-      "ceid": "ID:id",
-      "query": "\"share buyback\" OR \"carried interest\" OR \"shareholder primacy\""
-    },
-    {
-      "label": "Indonesian 93",
-      "lang": "id",
-      "standing": "press",
-      "hl": "id",
-      "gl": "ID",
-      "ceid": "ID:id",
-      "query": "\"market crash\" OR \"financial crisis\" OR bubble warning"
-    },
-    {
-      "label": "Japanese 94",
-      "lang": "ja",
-      "standing": "press",
-      "hl": "ja",
-      "gl": "JP",
-      "ceid": "JP:ja",
-      "query": "lobbying finance OR \"dark money\" OR \"campaign finance\" OR \"revolving door\""
-    },
-    {
-      "label": "Japanese 95",
-      "lang": "ja",
-      "standing": "press",
-      "hl": "ja",
-      "gl": "JP",
-      "ceid": "JP:ja",
-      "query": "austerity OR \"public services\" cuts OR \"user fees\" health"
-    },
-    {
-      "label": "Japanese 96",
-      "lang": "ja",
-      "standing": "press",
-      "hl": "ja",
-      "gl": "JP",
-      "ceid": "JP:ja",
-      "query": "\"self-sufficiency\" OR \"food sovereignty\" OR commons enclosure"
-    },
-    {
-      "label": "Korean 97",
-      "lang": "ko",
-      "standing": "press",
-      "hl": "ko",
-      "gl": "KR",
-      "ceid": "KR:ko",
-      "query": "\"wealth inequality\" OR \"income inequality\" OR \"wealth gap\""
-    },
-    {
-      "label": "Korean 98",
-      "lang": "ko",
-      "standing": "press",
-      "hl": "ko",
-      "gl": "KR",
-      "ceid": "KR:ko",
-      "query": "\"wage stagnation\" OR \"executive pay\" OR \"living wage\" OR \"labour share\""
-    },
-    {
-      "label": "Korean 99",
-      "lang": "ko",
-      "standing": "press",
-      "hl": "ko",
-      "gl": "KR",
-      "ceid": "KR:ko",
-      "query": "\"cost of living\" OR \"food insecurity\" OR \"fuel poverty\" OR \"food bank\""
-    },
-    {
-      "label": "Turkish 100",
-      "lang": "tr",
-      "standing": "press",
-      "hl": "tr",
-      "gl": "TR",
-      "ceid": "TR:tr",
-      "query": "\"social mobility\" OR \"intergenerational\" wealth OR mobility"
-    },
-    {
-      "label": "Turkish 101",
-      "lang": "tr",
-      "standing": "press",
-      "hl": "tr",
-      "gl": "TR",
-      "ceid": "TR:tr",
-      "query": "\"tax avoidance\" OR \"tax haven\" OR \"wealth tax\" OR \"offshore\" wealth"
-    },
-    {
-      "label": "Turkish 102",
-      "lang": "tr",
-      "standing": "press",
-      "hl": "tr",
-      "gl": "TR",
-      "ceid": "TR:tr",
-      "query": "\"gender pay gap\" OR \"pay gap\" report OR \"labour market discrimination\""
-    },
-    {
-      "label": "Italian 103",
-      "lang": "it",
-      "standing": "press",
-      "hl": "it",
-      "gl": "IT",
-      "ceid": "IT:it",
-      "query": "\"regional inequality\" OR \"left behind\" region OR \"infrastructure gap\""
-    },
-    {
-      "label": "Italian 104",
-      "lang": "it",
-      "standing": "press",
-      "hl": "it",
-      "gl": "IT",
-      "ceid": "IT:it",
-      "query": "\"access to credit\" OR redlining OR \"predatory lending\" OR unbanked"
-    },
-    {
-      "label": "Italian 105",
-      "lang": "it",
-      "standing": "press",
-      "hl": "it",
-      "gl": "IT",
-      "ceid": "IT:it",
-      "query": "\"high-frequency trading\" OR \"front running\" OR \"latency arbitrage\""
-    },
-    {
-      "label": "Dutch 106",
-      "lang": "nl",
-      "standing": "press",
-      "hl": "nl",
-      "gl": "NL",
-      "ceid": "NL:nl",
-      "query": "\"insider trading\" OR \"market abuse\" OR \"market manipulation\""
-    },
-    {
-      "label": "Dutch 107",
-      "lang": "nl",
-      "standing": "press",
-      "hl": "nl",
-      "gl": "NL",
-      "ceid": "NL:nl",
-      "query": "\"financial regulation\" rollback OR deregulation OR \"regulatory capture\""
-    },
-    {
-      "label": "Dutch 108",
-      "lang": "nl",
-      "standing": "press",
-      "hl": "nl",
-      "gl": "NL",
-      "ceid": "NL:nl",
-      "query": "\"dark pool\" OR \"payment for order flow\" OR \"off-exchange\" trading"
-    },
-    {
-      "label": "Polish 109",
-      "lang": "pl",
-      "standing": "press",
-      "hl": "pl",
-      "gl": "PL",
-      "ceid": "PL:pl",
-      "query": "BlackRock OR Vanguard OR \"State Street\" stake OR ownership OR voting"
-    },
-    {
-      "label": "Polish 110",
-      "lang": "pl",
-      "standing": "press",
-      "hl": "pl",
-      "gl": "PL",
-      "ceid": "PL:pl",
-      "query": "\"private equity\" buyout OR delisting OR \"take-private\" OR \"private credit\""
-    },
-    {
-      "label": "Polish 111",
-      "lang": "pl",
-      "standing": "press",
-      "hl": "pl",
-      "gl": "PL",
-      "ceid": "PL:pl",
-      "query": "\"accredited investor\" OR \"private placement\" OR \"club deal\""
-    },
-    {
-      "label": "Swedish 112",
-      "lang": "sv",
-      "standing": "press",
-      "hl": "sv",
-      "gl": "SE",
-      "ceid": "SE:sv",
-      "query": "\"climate disclosure\" OR \"ESG\" rules OR \"scope 3\" reporting"
-    },
-    {
-      "label": "Swedish 113",
-      "lang": "sv",
-      "standing": "press",
-      "hl": "sv",
-      "gl": "SE",
-      "ceid": "SE:sv",
-      "query": "\"too big to fail\" OR \"systemic risk\" OR \"bank merger\" OR bailout"
-    },
-    {
-      "label": "Swedish 114",
-      "lang": "sv",
-      "standing": "press",
-      "hl": "sv",
-      "gl": "SE",
-      "ceid": "SE:sv",
-      "query": "derivatives OR \"credit default swap\" OR \"shadow banking\" OR \"commodity speculation\""
-    },
-    {
-      "label": "Ukrainian 115",
-      "lang": "uk",
-      "standing": "press",
-      "hl": "uk",
-      "gl": "UA",
-      "ceid": "UA:uk",
-      "query": "\"pension fund\" holdings OR fees OR \"asset manager\" stewardship"
-    },
-    {
-      "label": "Ukrainian 116",
-      "lang": "uk",
-      "standing": "press",
-      "hl": "uk",
-      "gl": "UA",
-      "ceid": "UA:uk",
-      "query": "\"share buyback\" OR \"carried interest\" OR \"shareholder primacy\""
-    },
-    {
-      "label": "Ukrainian 117",
-      "lang": "uk",
-      "standing": "press",
-      "hl": "uk",
-      "gl": "UA",
-      "ceid": "UA:uk",
-      "query": "\"market crash\" OR \"financial crisis\" OR bubble warning"
-    },
-    {
-      "label": "Greek 118",
-      "lang": "el",
-      "standing": "press",
-      "hl": "el",
-      "gl": "GR",
-      "ceid": "GR:el",
-      "query": "lobbying finance OR \"dark money\" OR \"campaign finance\" OR \"revolving door\""
-    },
-    {
-      "label": "Greek 119",
-      "lang": "el",
-      "standing": "press",
-      "hl": "el",
-      "gl": "GR",
-      "ceid": "GR:el",
-      "query": "austerity OR \"public services\" cuts OR \"user fees\" health"
-    },
-    {
-      "label": "Greek 120",
-      "lang": "el",
-      "standing": "press",
-      "hl": "el",
-      "gl": "GR",
-      "ceid": "GR:el",
-      "query": "\"self-sufficiency\" OR \"food sovereignty\" OR commons enclosure"
-    },
-    {
-      "label": "Persian 121",
-      "lang": "fa",
-      "standing": "press",
-      "hl": "fa",
-      "gl": "IR",
-      "ceid": "IR:fa",
-      "query": "\"wealth inequality\" OR \"income inequality\" OR \"wealth gap\""
-    },
-    {
-      "label": "Persian 122",
-      "lang": "fa",
-      "standing": "press",
-      "hl": "fa",
-      "gl": "IR",
-      "ceid": "IR:fa",
-      "query": "\"wage stagnation\" OR \"executive pay\" OR \"living wage\" OR \"labour share\""
-    },
-    {
-      "label": "Persian 123",
-      "lang": "fa",
-      "standing": "press",
-      "hl": "fa",
-      "gl": "IR",
-      "ceid": "IR:fa",
-      "query": "\"cost of living\" OR \"food insecurity\" OR \"fuel poverty\" OR \"food bank\""
-    },
-    {
-      "label": "Vietnamese 124",
-      "lang": "vi",
-      "standing": "press",
-      "hl": "vi",
-      "gl": "VN",
-      "ceid": "VN:vi",
-      "query": "\"social mobility\" OR \"intergenerational\" wealth OR mobility"
-    },
-    {
-      "label": "Vietnamese 125",
-      "lang": "vi",
-      "standing": "press",
-      "hl": "vi",
-      "gl": "VN",
-      "ceid": "VN:vi",
-      "query": "\"tax avoidance\" OR \"tax haven\" OR \"wealth tax\" OR \"offshore\" wealth"
-    },
-    {
-      "label": "Vietnamese 126",
-      "lang": "vi",
-      "standing": "press",
-      "hl": "vi",
-      "gl": "VN",
-      "ceid": "VN:vi",
-      "query": "\"gender pay gap\" OR \"pay gap\" report OR \"labour market discrimination\""
-    },
-    {
-      "label": "Thai 127",
-      "lang": "th",
-      "standing": "press",
-      "hl": "th",
-      "gl": "TH",
-      "ceid": "TH:th",
-      "query": "\"regional inequality\" OR \"left behind\" region OR \"infrastructure gap\""
-    },
-    {
-      "label": "Thai 128",
-      "lang": "th",
-      "standing": "press",
-      "hl": "th",
-      "gl": "TH",
-      "ceid": "TH:th",
-      "query": "\"access to credit\" OR redlining OR \"predatory lending\" OR unbanked"
-    },
-    {
-      "label": "Thai 129",
-      "lang": "th",
-      "standing": "press",
-      "hl": "th",
-      "gl": "TH",
-      "ceid": "TH:th",
-      "query": "\"high-frequency trading\" OR \"front running\" OR \"latency arbitrage\""
-    },
-    {
-      "label": "Swahili (Kenya) 130",
-      "lang": "sw",
-      "standing": "press",
-      "hl": "sw",
-      "gl": "KE",
-      "ceid": "KE:sw",
-      "query": "\"insider trading\" OR \"market abuse\" OR \"market manipulation\""
-    },
-    {
-      "label": "Swahili (Kenya) 131",
-      "lang": "sw",
-      "standing": "press",
-      "hl": "sw",
-      "gl": "KE",
-      "ceid": "KE:sw",
-      "query": "\"financial regulation\" rollback OR deregulation OR \"regulatory capture\""
-    },
-    {
-      "label": "Swahili (Kenya) 132",
-      "lang": "sw",
-      "standing": "press",
-      "hl": "sw",
-      "gl": "KE",
-      "ceid": "KE:sw",
-      "query": "\"dark pool\" OR \"payment for order flow\" OR \"off-exchange\" trading"
-    },
-    {
-      "label": "Amharic (Ethiopia) 133",
-      "lang": "am",
-      "standing": "press",
-      "hl": "am",
-      "gl": "ET",
-      "ceid": "ET:am",
-      "query": "BlackRock OR Vanguard OR \"State Street\" stake OR ownership OR voting"
-    },
-    {
-      "label": "Amharic (Ethiopia) 134",
-      "lang": "am",
-      "standing": "press",
-      "hl": "am",
-      "gl": "ET",
-      "ceid": "ET:am",
-      "query": "\"private equity\" buyout OR delisting OR \"take-private\" OR \"private credit\""
-    },
-    {
-      "label": "Amharic (Ethiopia) 135",
-      "lang": "am",
-      "standing": "press",
-      "hl": "am",
-      "gl": "ET",
-      "ceid": "ET:am",
-      "query": "\"accredited investor\" OR \"private placement\" OR \"club deal\""
-    },
-    {
-      "label": "Hausa (Nigeria) 136",
-      "lang": "ha",
-      "standing": "press",
-      "hl": "ha",
-      "gl": "NG",
-      "ceid": "NG:ha",
-      "query": "\"climate disclosure\" OR \"ESG\" rules OR \"scope 3\" reporting"
-    },
-    {
-      "label": "Hausa (Nigeria) 137",
-      "lang": "ha",
-      "standing": "press",
-      "hl": "ha",
-      "gl": "NG",
-      "ceid": "NG:ha",
-      "query": "\"too big to fail\" OR \"systemic risk\" OR \"bank merger\" OR bailout"
-    },
-    {
-      "label": "Hausa (Nigeria) 138",
-      "lang": "ha",
-      "standing": "press",
-      "hl": "ha",
-      "gl": "NG",
-      "ceid": "NG:ha",
-      "query": "derivatives OR \"credit default swap\" OR \"shadow banking\" OR \"commodity speculation\""
-    }
-  ],
-  "events": [
-    {
-      "label": "Inequality data releases",
-      "lang": "en",
-      "standing": "official",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"World Inequality Report\" OR \"Gini coefficient\" OR \"household survey\" inequality OR \"income distribution\" data"
-    },
-    {
-      "label": "IMF and World Bank findings",
-      "lang": "en",
-      "standing": "official",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "IMF report inequality OR \"World Bank\" poverty OR \"shared prosperity\" report"
-    },
-    {
-      "label": "Central bank and stability warnings",
-      "lang": "en",
-      "standing": "official",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"financial stability\" report OR \"systemic risk\" warning OR \"stress test\" results bank"
-    },
-    {
-      "label": "Regulator enforcement",
-      "lang": "en",
-      "standing": "official",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "SEC charges OR \"Financial Conduct Authority\" fine OR regulator settlement trading OR \"market abuse\" penalty"
-    },
-    {
-      "label": "Court rulings on finance",
-      "lang": "en",
-      "standing": "official",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "court ruling bank OR \"securities fraud\" verdict OR \"equal pay\" ruling OR tax ruling multinational"
-    },
-    {
-      "label": "Shareholder concentration research",
-      "lang": "en",
-      "standing": "research",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"common ownership\" OR \"index funds\" ownership OR \"Big Three\" asset managers research"
-    },
-    {
-      "label": "Private markets shift",
-      "lang": "en",
-      "standing": "research",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"listed companies\" decline OR \"IPO drought\" OR \"private markets\" growth OR \"shrinking stock market\""
-    },
-    {
-      "label": "Market structure research",
-      "lang": "en",
-      "standing": "research",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"market structure\" reform OR \"best execution\" OR \"retail order flow\" study"
-    },
-    {
-      "label": "Tax and offshore investigations",
-      "lang": "en",
-      "standing": "research",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "offshore leak OR \"tax haven\" investigation OR \"effective tax rate\" multinational"
-    },
-    {
-      "label": "Wealth and billionaire tracking",
-      "lang": "en",
-      "standing": "research",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "billionaire wealth OR \"great wealth transfer\" OR \"family office\" growth"
-    },
-    {
-      "label": "Union and campaign responses",
-      "lang": "en",
-      "standing": "rights",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"tax the rich\" campaign OR union pay demand OR \"living wage\" campaign OR inequality protest"
-    },
-    {
-      "label": "Corporate accountability",
-      "lang": "en",
-      "standing": "rights",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "greenwashing claim OR \"corporate lobbying\" finance OR \"beneficial ownership\" register"
-    },
-    {
-      "label": "Debt and the global south",
-      "lang": "en",
-      "standing": "rights",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"debt justice\" OR \"sovereign debt\" restructuring OR \"debt cancellation\" campaign"
-    },
-    {
-      "label": "Access and exclusion in finance",
-      "lang": "en",
-      "standing": "rights",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"financial exclusion\" OR \"bank branch closure\" OR \"financial literacy\" barrier"
-    },
-    {
-      "label": "Housing and rent",
-      "lang": "en",
-      "standing": "rights",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"rent burden\" OR eviction record OR \"housing affordability\" crisis"
-    },
-    {
-      "label": "Self-sufficiency and alternatives",
-      "lang": "en",
-      "standing": "rights",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"worker cooperative\" growth OR \"community land trust\" OR \"food sovereignty\" movement"
-    }
-  ]
+ "_note": [
+  "Sources for the inequality wire.",
+  "",
+  "direct: institutional and research feeds. Those carried over from sibling",
+  "  repos are already proven working; the rest follow each body's documented",
+  "  feed path. Any that does not answer is reported as unreachable in the status",
+  "  line and in Sources & coverage rather than being hidden.",
+  "",
+  "gnews: Google News locale searches. The harvester builds the URL from",
+  "  hl / gl / ceid. Twenty-four queries rotate across 46 locales so the whole",
+  "  subject range is covered rather than one theme repeated.",
+  "",
+  "events: subject searches for recurring publications and enforcement actions.",
+  "",
+  "standing is provenance, not importance:",
+  "  official  regulators, central banks, courts, the IMF, World Bank, OECD, BIS",
+  "  research  institutes and inequality data",
+  "  press     general news across the locales",
+  "  rights    campaigning and corporate-accountability organisations"
+ ],
+ "direct": [
+  {
+   "name": "IMF",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.imf.org/en/News/RSS?language=eng"
+  },
+  {
+   "name": "World Bank",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.worldbank.org/en/news/all?format=rss"
+  },
+  {
+   "name": "OECD",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.oecd.org/newsroom/index.xml"
+  },
+  {
+   "name": "UNCTAD",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://unctad.org/rss.xml"
+  },
+  {
+   "name": "Bank for International Settlements",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.bis.org/rss/whatsnew.xml"
+  },
+  {
+   "name": "Federal Reserve",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.federalreserve.gov/feeds/press_all.xml"
+  },
+  {
+   "name": "European Central Bank",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.ecb.europa.eu/rss/press.html"
+  },
+  {
+   "name": "Bank of England",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.bankofengland.co.uk/rss/news"
+  },
+  {
+   "name": "Financial Stability Board",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.fsb.org/feed/"
+  },
+  {
+   "name": "Tax Justice Network",
+   "lang": "en",
+   "standing": "research",
+   "url": "https://taxjustice.net/feed/"
+  },
+  {
+   "name": "Peterson Institute",
+   "lang": "en",
+   "standing": "research",
+   "url": "https://www.piie.com/rss.xml"
+  },
+  {
+   "name": "ODI",
+   "lang": "en",
+   "standing": "research",
+   "url": "https://odi.org/en/feed/"
+  },
+  {
+   "name": "CEPR",
+   "lang": "en",
+   "standing": "research",
+   "url": "https://cepr.org/rss.xml"
+  },
+  {
+   "name": "AidData",
+   "lang": "en",
+   "standing": "research",
+   "url": "https://www.aiddata.org/rss"
+  },
+  {
+   "name": "Transnational Institute",
+   "lang": "en",
+   "standing": "rights",
+   "url": "https://www.tni.org/en/rss.xml"
+  },
+  {
+   "name": "Corporate Europe Observatory",
+   "lang": "en",
+   "standing": "rights",
+   "url": "https://corporateeurope.org/en/rss.xml"
+  },
+  {
+   "name": "Global Witness",
+   "lang": "en",
+   "standing": "rights",
+   "url": "https://www.globalwitness.org/en/rss/"
+  },
+  {
+   "name": "Financial Transparency Coalition",
+   "lang": "en",
+   "standing": "rights",
+   "url": "https://financialtransparency.org/feed/"
+  },
+  {
+   "name": "Debt Justice",
+   "lang": "en",
+   "standing": "rights",
+   "url": "https://debtjustice.org.uk/feed"
+  },
+  {
+   "name": "Eurodad",
+   "lang": "en",
+   "standing": "rights",
+   "url": "https://www.eurodad.org/rss.xml"
+  },
+  {
+   "name": "Public Citizen · Global Trade Watch",
+   "lang": "en",
+   "standing": "rights",
+   "url": "https://www.citizen.org/feed/"
+  },
+  {
+   "name": "Bretton Woods Project",
+   "lang": "en",
+   "standing": "rights",
+   "url": "https://www.brettonwoodsproject.org/feed/"
+  },
+  {
+   "name": "Transparency International",
+   "lang": "en",
+   "standing": "rights",
+   "url": "https://www.transparency.org/en/rss"
+  },
+  {
+   "name": "Human Rights Watch",
+   "lang": "en",
+   "standing": "rights",
+   "url": "https://www.hrw.org/rss/news"
+  }
+ ],
+ "gnews": [
+  {
+   "label": "English (US) · wages",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "theme": "wages",
+   "query": "minimum wage rise OR real wages fall OR wage theft claim"
+  },
+  {
+   "label": "English (US) · wealth",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "theme": "wealth",
+   "query": "wealth concentration report OR billionaire wealth surge OR top 1 percent share"
+  },
+  {
+   "label": "English (US) · taxation",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "theme": "taxation",
+   "query": "wealth tax proposal OR tax avoidance multinational OR offshore leak investigation"
+  },
+  {
+   "label": "English (US) · paygap",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "theme": "paygap",
+   "query": "gender pay gap report OR CEO pay ratio worker OR executive pay rise"
+  },
+  {
+   "label": "English (US) · services",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "theme": "services",
+   "query": "public services cuts austerity OR healthcare access inequality OR housing affordability crisis"
+  },
+  {
+   "label": "English (UK) · wages",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "theme": "wages",
+   "query": "minimum wage rise OR real wages fall OR wage theft claim"
+  },
+  {
+   "label": "English (UK) · wealth",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "theme": "wealth",
+   "query": "wealth concentration report OR billionaire wealth surge OR top 1 percent share"
+  },
+  {
+   "label": "English (UK) · taxation",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "theme": "taxation",
+   "query": "wealth tax proposal OR tax avoidance multinational OR offshore leak investigation"
+  },
+  {
+   "label": "English (UK) · paygap",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "theme": "paygap",
+   "query": "gender pay gap report OR CEO pay ratio worker OR executive pay rise"
+  },
+  {
+   "label": "English (UK) · services",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "theme": "services",
+   "query": "public services cuts austerity OR healthcare access inequality OR housing affordability crisis"
+  },
+  {
+   "label": "English (India) · wages",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "theme": "wages",
+   "query": "minimum wage rise OR real wages fall OR wage theft claim"
+  },
+  {
+   "label": "English (India) · wealth",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "theme": "wealth",
+   "query": "wealth concentration report OR billionaire wealth surge OR top 1 percent share"
+  },
+  {
+   "label": "English (India) · taxation",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "theme": "taxation",
+   "query": "wealth tax proposal OR tax avoidance multinational OR offshore leak investigation"
+  },
+  {
+   "label": "English (India) · paygap",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "theme": "paygap",
+   "query": "gender pay gap report OR CEO pay ratio worker OR executive pay rise"
+  },
+  {
+   "label": "English (India) · services",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "theme": "services",
+   "query": "public services cuts austerity OR healthcare access inequality OR housing affordability crisis"
+  },
+  {
+   "label": "English (Nigeria) · wages",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-NG",
+   "gl": "NG",
+   "ceid": "NG:en",
+   "theme": "wages",
+   "query": "minimum wage rise OR real wages fall OR wage theft claim"
+  },
+  {
+   "label": "English (Nigeria) · wealth",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-NG",
+   "gl": "NG",
+   "ceid": "NG:en",
+   "theme": "wealth",
+   "query": "wealth concentration report OR billionaire wealth surge OR top 1 percent share"
+  },
+  {
+   "label": "English (Nigeria) · taxation",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-NG",
+   "gl": "NG",
+   "ceid": "NG:en",
+   "theme": "taxation",
+   "query": "wealth tax proposal OR tax avoidance multinational OR offshore leak investigation"
+  },
+  {
+   "label": "English (Nigeria) · paygap",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-NG",
+   "gl": "NG",
+   "ceid": "NG:en",
+   "theme": "paygap",
+   "query": "gender pay gap report OR CEO pay ratio worker OR executive pay rise"
+  },
+  {
+   "label": "English (Nigeria) · services",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-NG",
+   "gl": "NG",
+   "ceid": "NG:en",
+   "theme": "services",
+   "query": "public services cuts austerity OR healthcare access inequality OR housing affordability crisis"
+  },
+  {
+   "label": "English (Australia) · wages",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-AU",
+   "gl": "AU",
+   "ceid": "AU:en",
+   "theme": "wages",
+   "query": "minimum wage rise OR real wages fall OR wage theft claim"
+  },
+  {
+   "label": "English (Australia) · wealth",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-AU",
+   "gl": "AU",
+   "ceid": "AU:en",
+   "theme": "wealth",
+   "query": "wealth concentration report OR billionaire wealth surge OR top 1 percent share"
+  },
+  {
+   "label": "English (Australia) · taxation",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-AU",
+   "gl": "AU",
+   "ceid": "AU:en",
+   "theme": "taxation",
+   "query": "wealth tax proposal OR tax avoidance multinational OR offshore leak investigation"
+  },
+  {
+   "label": "English (Australia) · paygap",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-AU",
+   "gl": "AU",
+   "ceid": "AU:en",
+   "theme": "paygap",
+   "query": "gender pay gap report OR CEO pay ratio worker OR executive pay rise"
+  },
+  {
+   "label": "English (Australia) · services",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-AU",
+   "gl": "AU",
+   "ceid": "AU:en",
+   "theme": "services",
+   "query": "public services cuts austerity OR healthcare access inequality OR housing affordability crisis"
+  },
+  {
+   "label": "English (South Africa) · wages",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-ZA",
+   "gl": "ZA",
+   "ceid": "ZA:en",
+   "theme": "wages",
+   "query": "minimum wage rise OR real wages fall OR wage theft claim"
+  },
+  {
+   "label": "English (South Africa) · wealth",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-ZA",
+   "gl": "ZA",
+   "ceid": "ZA:en",
+   "theme": "wealth",
+   "query": "wealth concentration report OR billionaire wealth surge OR top 1 percent share"
+  },
+  {
+   "label": "English (South Africa) · taxation",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-ZA",
+   "gl": "ZA",
+   "ceid": "ZA:en",
+   "theme": "taxation",
+   "query": "wealth tax proposal OR tax avoidance multinational OR offshore leak investigation"
+  },
+  {
+   "label": "English (South Africa) · paygap",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-ZA",
+   "gl": "ZA",
+   "ceid": "ZA:en",
+   "theme": "paygap",
+   "query": "gender pay gap report OR CEO pay ratio worker OR executive pay rise"
+  },
+  {
+   "label": "English (South Africa) · services",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-ZA",
+   "gl": "ZA",
+   "ceid": "ZA:en",
+   "theme": "services",
+   "query": "public services cuts austerity OR healthcare access inequality OR housing affordability crisis"
+  },
+  {
+   "label": "Español (España) · wages",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "theme": "wages",
+   "query": "subida del salario mínimo OR caída de los salarios reales OR robo de salarios"
+  },
+  {
+   "label": "Español (España) · wealth",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "theme": "wealth",
+   "query": "concentración de la riqueza informe OR fortuna de los milmillonarios OR el 1% más rico"
+  },
+  {
+   "label": "Español (España) · taxation",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "theme": "taxation",
+   "query": "impuesto a la riqueza propuesta OR elusión fiscal multinacional OR filtración offshore"
+  },
+  {
+   "label": "Español (España) · paygap",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "theme": "paygap",
+   "query": "brecha salarial de género informe OR ratio salarial del consejero delegado"
+  },
+  {
+   "label": "Español (España) · services",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "theme": "services",
+   "query": "recortes en servicios públicos austeridad OR desigualdad en el acceso sanitario OR crisis de vivienda"
+  },
+  {
+   "label": "Español (México) · wages",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "theme": "wages",
+   "query": "subida del salario mínimo OR caída de los salarios reales OR robo de salarios"
+  },
+  {
+   "label": "Español (México) · wealth",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "theme": "wealth",
+   "query": "concentración de la riqueza informe OR fortuna de los milmillonarios OR el 1% más rico"
+  },
+  {
+   "label": "Español (México) · taxation",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "theme": "taxation",
+   "query": "impuesto a la riqueza propuesta OR elusión fiscal multinacional OR filtración offshore"
+  },
+  {
+   "label": "Español (México) · paygap",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "theme": "paygap",
+   "query": "brecha salarial de género informe OR ratio salarial del consejero delegado"
+  },
+  {
+   "label": "Español (México) · services",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "theme": "services",
+   "query": "recortes en servicios públicos austeridad OR desigualdad en el acceso sanitario OR crisis de vivienda"
+  },
+  {
+   "label": "Español (Argentina) · wages",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "theme": "wages",
+   "query": "subida del salario mínimo OR caída de los salarios reales OR robo de salarios"
+  },
+  {
+   "label": "Español (Argentina) · wealth",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "theme": "wealth",
+   "query": "concentración de la riqueza informe OR fortuna de los milmillonarios OR el 1% más rico"
+  },
+  {
+   "label": "Español (Argentina) · taxation",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "theme": "taxation",
+   "query": "impuesto a la riqueza propuesta OR elusión fiscal multinacional OR filtración offshore"
+  },
+  {
+   "label": "Español (Argentina) · paygap",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "theme": "paygap",
+   "query": "brecha salarial de género informe OR ratio salarial del consejero delegado"
+  },
+  {
+   "label": "Español (Argentina) · services",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "theme": "services",
+   "query": "recortes en servicios públicos austeridad OR desigualdad en el acceso sanitario OR crisis de vivienda"
+  },
+  {
+   "label": "Português (Brasil) · wages",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "theme": "wages",
+   "query": "aumento do salário mínimo OR queda dos salários reais OR roubo salarial"
+  },
+  {
+   "label": "Português (Brasil) · wealth",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "theme": "wealth",
+   "query": "concentração da riqueza relatório OR fortuna dos bilionários OR o 1% mais rico"
+  },
+  {
+   "label": "Português (Brasil) · taxation",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "theme": "taxation",
+   "query": "imposto sobre a riqueza proposta OR elisão fiscal multinacional OR fuga offshore"
+  },
+  {
+   "label": "Português (Brasil) · paygap",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "theme": "paygap",
+   "query": "disparidade salarial de género relatório OR rácio salarial do CEO"
+  },
+  {
+   "label": "Português (Brasil) · services",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "theme": "services",
+   "query": "cortes nos serviços públicos austeridade OR desigualdade no acesso à saúde OR crise da habitação"
+  },
+  {
+   "label": "Português (Portugal) · wages",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-PT",
+   "gl": "PT",
+   "ceid": "PT:pt-150",
+   "theme": "wages",
+   "query": "aumento do salário mínimo OR queda dos salários reais OR roubo salarial"
+  },
+  {
+   "label": "Português (Portugal) · wealth",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-PT",
+   "gl": "PT",
+   "ceid": "PT:pt-150",
+   "theme": "wealth",
+   "query": "concentração da riqueza relatório OR fortuna dos bilionários OR o 1% mais rico"
+  },
+  {
+   "label": "Português (Portugal) · taxation",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-PT",
+   "gl": "PT",
+   "ceid": "PT:pt-150",
+   "theme": "taxation",
+   "query": "imposto sobre a riqueza proposta OR elisão fiscal multinacional OR fuga offshore"
+  },
+  {
+   "label": "Português (Portugal) · paygap",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-PT",
+   "gl": "PT",
+   "ceid": "PT:pt-150",
+   "theme": "paygap",
+   "query": "disparidade salarial de género relatório OR rácio salarial do CEO"
+  },
+  {
+   "label": "Português (Portugal) · services",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-PT",
+   "gl": "PT",
+   "ceid": "PT:pt-150",
+   "theme": "services",
+   "query": "cortes nos serviços públicos austeridade OR desigualdade no acesso à saúde OR crise da habitação"
+  },
+  {
+   "label": "Français · wages",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "theme": "wages",
+   "query": "hausse du salaire minimum OR baisse des salaires réels OR vol de salaire"
+  },
+  {
+   "label": "Français · wealth",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "theme": "wealth",
+   "query": "concentration des richesses rapport OR fortune des milliardaires OR les 1% les plus riches"
+  },
+  {
+   "label": "Français · taxation",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "theme": "taxation",
+   "query": "impôt sur la fortune proposition OR évasion fiscale multinationale OR fuite offshore"
+  },
+  {
+   "label": "Français · paygap",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "theme": "paygap",
+   "query": "écart salarial femmes-hommes rapport OR écart de rémunération dirigeant salarié"
+  },
+  {
+   "label": "Français · services",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "theme": "services",
+   "query": "coupes dans les services publics austérité OR inégalités d'accès aux soins OR crise du logement"
+  },
+  {
+   "label": "Français (Canada) · wages",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "CA",
+   "ceid": "CA:fr",
+   "theme": "wages",
+   "query": "hausse du salaire minimum OR baisse des salaires réels OR vol de salaire"
+  },
+  {
+   "label": "Français (Canada) · wealth",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "CA",
+   "ceid": "CA:fr",
+   "theme": "wealth",
+   "query": "concentration des richesses rapport OR fortune des milliardaires OR les 1% les plus riches"
+  },
+  {
+   "label": "Français (Canada) · taxation",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "CA",
+   "ceid": "CA:fr",
+   "theme": "taxation",
+   "query": "impôt sur la fortune proposition OR évasion fiscale multinationale OR fuite offshore"
+  },
+  {
+   "label": "Français (Canada) · paygap",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "CA",
+   "ceid": "CA:fr",
+   "theme": "paygap",
+   "query": "écart salarial femmes-hommes rapport OR écart de rémunération dirigeant salarié"
+  },
+  {
+   "label": "Français (Canada) · services",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "CA",
+   "ceid": "CA:fr",
+   "theme": "services",
+   "query": "coupes dans les services publics austérité OR inégalités d'accès aux soins OR crise du logement"
+  },
+  {
+   "label": "Deutsch · wages",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "theme": "wages",
+   "query": "Mindestlohn Erhöhung OR Reallöhne sinken OR Lohnraub"
+  },
+  {
+   "label": "Deutsch · wealth",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "theme": "wealth",
+   "query": "Vermögenskonzentration Bericht OR Milliardärsvermögen OR reichstes Prozent"
+  },
+  {
+   "label": "Deutsch · taxation",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "theme": "taxation",
+   "query": "Vermögensteuer Vorschlag OR Steuervermeidung Konzern OR Offshore-Leak"
+  },
+  {
+   "label": "Deutsch · paygap",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "theme": "paygap",
+   "query": "Gender Pay Gap Bericht OR Verhältnis Vorstandsgehalt Beschäftigte"
+  },
+  {
+   "label": "Deutsch · services",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "theme": "services",
+   "query": "Kürzungen öffentliche Dienste Sparpolitik OR ungleicher Zugang Gesundheit OR Wohnungskrise"
+  },
+  {
+   "label": "Italiano · wages",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "theme": "wages",
+   "query": "aumento del salario minimo OR calo dei salari reali OR furto di salario"
+  },
+  {
+   "label": "Italiano · wealth",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "theme": "wealth",
+   "query": "concentrazione della ricchezza rapporto OR patrimoni dei miliardari OR l'1% più ricco"
+  },
+  {
+   "label": "Italiano · taxation",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "theme": "taxation",
+   "query": "patrimoniale proposta OR elusione fiscale multinazionali OR fuga offshore"
+  },
+  {
+   "label": "Italiano · paygap",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "theme": "paygap",
+   "query": "divario retributivo di genere rapporto OR rapporto tra stipendio amministratore delegato e dipendenti"
+  },
+  {
+   "label": "Italiano · services",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "theme": "services",
+   "query": "tagli ai servizi pubblici austerità OR disuguaglianza accesso alle cure OR crisi abitativa"
+  },
+  {
+   "label": "Nederlands · wages",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "NL",
+   "ceid": "NL:nl",
+   "theme": "wages",
+   "query": "minimumloon verhoging OR reële lonen dalen"
+  },
+  {
+   "label": "Nederlands · wealth",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "NL",
+   "ceid": "NL:nl",
+   "theme": "wealth",
+   "query": "vermogensconcentratie rapport OR vermogen miljardairs"
+  },
+  {
+   "label": "Nederlands · taxation",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "NL",
+   "ceid": "NL:nl",
+   "theme": "taxation",
+   "query": "vermogensbelasting voorstel OR belastingontwijking multinational"
+  },
+  {
+   "label": "Nederlands · paygap",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "NL",
+   "ceid": "NL:nl",
+   "theme": "paygap",
+   "query": "loonkloof rapport OR beloningsverhouding bestuurder werknemer"
+  },
+  {
+   "label": "Polski · wages",
+   "lang": "pl",
+   "standing": "press",
+   "hl": "pl",
+   "gl": "PL",
+   "ceid": "PL:pl",
+   "theme": "wages",
+   "query": "podwyżka płacy minimalnej OR spadek płac realnych"
+  },
+  {
+   "label": "Polski · wealth",
+   "lang": "pl",
+   "standing": "press",
+   "hl": "pl",
+   "gl": "PL",
+   "ceid": "PL:pl",
+   "theme": "wealth",
+   "query": "koncentracja majątku raport OR majątki miliarderów"
+  },
+  {
+   "label": "Polski · taxation",
+   "lang": "pl",
+   "standing": "press",
+   "hl": "pl",
+   "gl": "PL",
+   "ceid": "PL:pl",
+   "theme": "taxation",
+   "query": "podatek majątkowy propozycja OR unikanie opodatkowania korporacje"
+  },
+  {
+   "label": "Polski · paygap",
+   "lang": "pl",
+   "standing": "press",
+   "hl": "pl",
+   "gl": "PL",
+   "ceid": "PL:pl",
+   "theme": "paygap",
+   "query": "luka płacowa raport OR wynagrodzenie prezesa a pracowników"
+  },
+  {
+   "label": "Русский · wages",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "RU",
+   "ceid": "RU:ru",
+   "theme": "wages",
+   "query": "повышение минимальной зарплаты OR падение реальных зарплат"
+  },
+  {
+   "label": "Русский · wealth",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "RU",
+   "ceid": "RU:ru",
+   "theme": "wealth",
+   "query": "концентрация богатства доклад OR состояние миллиардеров"
+  },
+  {
+   "label": "Русский · taxation",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "RU",
+   "ceid": "RU:ru",
+   "theme": "taxation",
+   "query": "налог на богатство предложение OR уклонение от налогов корпорации"
+  },
+  {
+   "label": "Русский · paygap",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "RU",
+   "ceid": "RU:ru",
+   "theme": "paygap",
+   "query": "гендерный разрыв в оплате доклад OR зарплата гендиректора и работников"
+  },
+  {
+   "label": "Русский · services",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "RU",
+   "ceid": "RU:ru",
+   "theme": "services",
+   "query": "сокращение социальных услуг OR неравный доступ к медицине OR жилищный кризис"
+  },
+  {
+   "label": "Türkçe · wages",
+   "lang": "tr",
+   "standing": "press",
+   "hl": "tr",
+   "gl": "TR",
+   "ceid": "TR:tr",
+   "theme": "wages",
+   "query": "asgari ücret artışı OR reel ücretlerde düşüş"
+  },
+  {
+   "label": "Türkçe · wealth",
+   "lang": "tr",
+   "standing": "press",
+   "hl": "tr",
+   "gl": "TR",
+   "ceid": "TR:tr",
+   "theme": "wealth",
+   "query": "servet yoğunlaşması rapor OR milyarderlerin serveti"
+  },
+  {
+   "label": "Türkçe · taxation",
+   "lang": "tr",
+   "standing": "press",
+   "hl": "tr",
+   "gl": "TR",
+   "ceid": "TR:tr",
+   "theme": "taxation",
+   "query": "servet vergisi önerisi OR vergiden kaçınma çok uluslu"
+  },
+  {
+   "label": "Türkçe · services",
+   "lang": "tr",
+   "standing": "press",
+   "hl": "tr",
+   "gl": "TR",
+   "ceid": "TR:tr",
+   "theme": "services",
+   "query": "kamu hizmetlerinde kesinti OR sağlığa erişimde eşitsizlik OR konut krizi"
+  },
+  {
+   "label": "Bahasa Indonesia · wages",
+   "lang": "id",
+   "standing": "press",
+   "hl": "id",
+   "gl": "ID",
+   "ceid": "ID:id",
+   "theme": "wages",
+   "query": "kenaikan upah minimum OR upah riil turun"
+  },
+  {
+   "label": "Bahasa Indonesia · wealth",
+   "lang": "id",
+   "standing": "press",
+   "hl": "id",
+   "gl": "ID",
+   "ceid": "ID:id",
+   "theme": "wealth",
+   "query": "konsentrasi kekayaan laporan OR kekayaan miliarder"
+  },
+  {
+   "label": "Bahasa Indonesia · taxation",
+   "lang": "id",
+   "standing": "press",
+   "hl": "id",
+   "gl": "ID",
+   "ceid": "ID:id",
+   "theme": "taxation",
+   "query": "pajak kekayaan usulan OR penghindaran pajak perusahaan multinasional"
+  },
+  {
+   "label": "Bahasa Indonesia · services",
+   "lang": "id",
+   "standing": "press",
+   "hl": "id",
+   "gl": "ID",
+   "ceid": "ID:id",
+   "theme": "services",
+   "query": "pemangkasan layanan publik OR ketimpangan akses kesehatan OR krisis perumahan"
+  },
+  {
+   "label": "Tiếng Việt · wages",
+   "lang": "vi",
+   "standing": "press",
+   "hl": "vi",
+   "gl": "VN",
+   "ceid": "VN:vi",
+   "theme": "wages",
+   "query": "tăng lương tối thiểu OR lương thực tế giảm"
+  },
+  {
+   "label": "ไทย · wages",
+   "lang": "th",
+   "standing": "press",
+   "hl": "th",
+   "gl": "TH",
+   "ceid": "TH:th",
+   "theme": "wages",
+   "query": "ขึ้นค่าแรงขั้นต่ำ OR ค่าจ้างที่แท้จริงลดลง"
+  },
+  {
+   "label": "日本語 · wages",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "theme": "wages",
+   "query": "最低賃金 引き上げ OR 実質賃金 低下"
+  },
+  {
+   "label": "日本語 · wealth",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "theme": "wealth",
+   "query": "富の集中 報告 OR 富裕層 資産 増加"
+  },
+  {
+   "label": "日本語 · taxation",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "theme": "taxation",
+   "query": "富裕税 提案 OR 多国籍企業 租税回避 OR オフショア 流出"
+  },
+  {
+   "label": "日本語 · paygap",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "theme": "paygap",
+   "query": "男女賃金格差 報告 OR 役員報酬 従業員 比率"
+  },
+  {
+   "label": "日本語 · services",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "theme": "services",
+   "query": "公共サービス 削減 OR 医療アクセス 格差 OR 住宅費 高騰"
+  },
+  {
+   "label": "한국어 · wages",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "theme": "wages",
+   "query": "최저임금 인상 OR 실질임금 하락"
+  },
+  {
+   "label": "한국어 · wealth",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "theme": "wealth",
+   "query": "부의 집중 보고서 OR 억만장자 자산 증가"
+  },
+  {
+   "label": "한국어 · taxation",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "theme": "taxation",
+   "query": "부유세 제안 OR 다국적기업 조세회피"
+  },
+  {
+   "label": "한국어 · paygap",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "theme": "paygap",
+   "query": "성별 임금 격차 보고서 OR 임원 보수 직원 비율"
+  },
+  {
+   "label": "한국어 · services",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "theme": "services",
+   "query": "공공서비스 축소 OR 의료 접근성 격차 OR 주거비 위기"
+  },
+  {
+   "label": "中文 (台灣) · wages",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "theme": "wages",
+   "query": "最低工資 上調 OR 實際工資 下降 OR 欠薪"
+  },
+  {
+   "label": "中文 (台灣) · wealth",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "theme": "wealth",
+   "query": "財富集中 報告 OR 億萬富豪 財富 增長"
+  },
+  {
+   "label": "中文 (台灣) · taxation",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "theme": "taxation",
+   "query": "財富稅 提案 OR 跨國公司 避稅 OR 離岸 洩露"
+  },
+  {
+   "label": "中文 (台灣) · paygap",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "theme": "paygap",
+   "query": "性別薪酬差距 報告 OR 高管薪酬 員工 倍數"
+  },
+  {
+   "label": "中文 (台灣) · services",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "theme": "services",
+   "query": "公共服務 削減 OR 醫療可及性 不平等 OR 住房 危機"
+  },
+  {
+   "label": "中文 (香港) · wages",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "theme": "wages",
+   "query": "最低工資 上調 OR 實際工資 下降 OR 欠薪"
+  },
+  {
+   "label": "中文 (香港) · wealth",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "theme": "wealth",
+   "query": "財富集中 報告 OR 億萬富豪 財富 增長"
+  },
+  {
+   "label": "中文 (香港) · taxation",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "theme": "taxation",
+   "query": "財富稅 提案 OR 跨國公司 避稅 OR 離岸 泄露"
+  },
+  {
+   "label": "中文 (香港) · paygap",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "theme": "paygap",
+   "query": "性別薪酬差距 報告 OR 高管薪酬 員工 倍數"
+  },
+  {
+   "label": "中文 (香港) · services",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "theme": "services",
+   "query": "公共服務 削減 OR 醫療可及性 不平等 OR 住房 危機"
+  },
+  {
+   "label": "हिन्दी · wages",
+   "lang": "hi",
+   "standing": "press",
+   "hl": "hi",
+   "gl": "IN",
+   "ceid": "IN:hi",
+   "theme": "wages",
+   "query": "न्यूनतम मजदूरी वृद्धि OR वास्तविक मजदूरी में गिरावट"
+  },
+  {
+   "label": "हिन्दी · wealth",
+   "lang": "hi",
+   "standing": "press",
+   "hl": "hi",
+   "gl": "IN",
+   "ceid": "IN:hi",
+   "theme": "wealth",
+   "query": "धन का संकेंद्रण रिपोर्ट OR अरबपतियों की संपत्ति"
+  },
+  {
+   "label": "العربية (مصر) · wages",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "EG",
+   "ceid": "EG:ar",
+   "theme": "wages",
+   "query": "رفع الحد الأدنى للأجور OR تراجع الأجور الحقيقية"
+  },
+  {
+   "label": "العربية (مصر) · wealth",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "EG",
+   "ceid": "EG:ar",
+   "theme": "wealth",
+   "query": "تركز الثروة تقرير OR ثروات المليارديرات"
+  },
+  {
+   "label": "العربية (مصر) · taxation",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "EG",
+   "ceid": "EG:ar",
+   "theme": "taxation",
+   "query": "ضريبة الثروة اقتراح OR التهرب الضريبي شركات متعددة الجنسيات"
+  },
+  {
+   "label": "العربية (مصر) · paygap",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "EG",
+   "ceid": "EG:ar",
+   "theme": "paygap",
+   "query": "فجوة الأجور بين الجنسين تقرير OR نسبة أجر الرئيس التنفيذي"
+  },
+  {
+   "label": "العربية (الإمارات) · wages",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "AE",
+   "ceid": "AE:ar",
+   "theme": "wages",
+   "query": "رفع الحد الأدنى للأجور OR تراجع الأجور الحقيقية"
+  },
+  {
+   "label": "العربية (الإمارات) · wealth",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "AE",
+   "ceid": "AE:ar",
+   "theme": "wealth",
+   "query": "تركز الثروة تقرير OR ثروات المليارديرات"
+  },
+  {
+   "label": "العربية (الإمارات) · taxation",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "AE",
+   "ceid": "AE:ar",
+   "theme": "taxation",
+   "query": "ضريبة الثروة اقتراح OR التهرب الضريبي شركات متعددة الجنسيات"
+  },
+  {
+   "label": "العربية (الإمارات) · paygap",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "AE",
+   "ceid": "AE:ar",
+   "theme": "paygap",
+   "query": "فجوة الأجور بين الجنسين تقرير OR نسبة أجر الرئيس التنفيذي"
+  },
+  {
+   "label": "Ελληνικά · wages",
+   "lang": "el",
+   "standing": "press",
+   "hl": "el",
+   "gl": "GR",
+   "ceid": "GR:el",
+   "theme": "wages",
+   "query": "αύξηση κατώτατου μισθού OR πτώση πραγματικών μισθών"
+  },
+  {
+   "label": "Ελληνικά · wealth",
+   "lang": "el",
+   "standing": "press",
+   "hl": "el",
+   "gl": "GR",
+   "ceid": "GR:el",
+   "theme": "wealth",
+   "query": "συγκέντρωση πλούτου έκθεση OR περιουσίες δισεκατομμυριούχων"
+  },
+  {
+   "label": "Ελληνικά · taxation",
+   "lang": "el",
+   "standing": "press",
+   "hl": "el",
+   "gl": "GR",
+   "ceid": "GR:el",
+   "theme": "taxation",
+   "query": "φόρος πλούτου πρόταση OR φοροαποφυγή πολυεθνικών"
+  },
+  {
+   "label": "Ελληνικά · services",
+   "lang": "el",
+   "standing": "press",
+   "hl": "el",
+   "gl": "GR",
+   "ceid": "GR:el",
+   "theme": "services",
+   "query": "περικοπές δημόσιων υπηρεσιών OR ανισότητα πρόσβασης στην υγεία"
+  },
+  {
+   "label": "Svenska · wages",
+   "lang": "sv",
+   "standing": "press",
+   "hl": "sv",
+   "gl": "SE",
+   "ceid": "SE:sv",
+   "theme": "wages",
+   "query": "höjd minimilön OR sjunkande reallöner"
+  },
+  {
+   "label": "Svenska · wealth",
+   "lang": "sv",
+   "standing": "press",
+   "hl": "sv",
+   "gl": "SE",
+   "ceid": "SE:sv",
+   "theme": "wealth",
+   "query": "förmögenhetskoncentration rapport OR miljardärers förmögenhet"
+  },
+  {
+   "label": "Svenska · taxation",
+   "lang": "sv",
+   "standing": "press",
+   "hl": "sv",
+   "gl": "SE",
+   "ceid": "SE:sv",
+   "theme": "taxation",
+   "query": "förmögenhetsskatt förslag OR skatteflykt multinationella"
+  },
+  {
+   "label": "Svenska · paygap",
+   "lang": "sv",
+   "standing": "press",
+   "hl": "sv",
+   "gl": "SE",
+   "ceid": "SE:sv",
+   "theme": "paygap",
+   "query": "lönegap mellan könen rapport OR vd-lön i förhållande till anställda"
+  },
+  {
+   "label": "English (US) · selfsufficiency",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "theme": "selfsufficiency",
+   "query": "household self-sufficiency food growing OR community land trust OR mutual aid network economy"
+  },
+  {
+   "label": "Español · selfsufficiency",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "theme": "selfsufficiency",
+   "query": "autosuficiencia doméstica cultivo OR banco de tierras comunitario OR red de apoyo mutuo economía"
+  },
+  {
+   "label": "Português (BR) · selfsufficiency",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "theme": "selfsufficiency",
+   "query": "autossuficiência doméstica cultivo OR banco de terras comunitário OR rede de apoio mútuo"
+  },
+  {
+   "label": "Français · selfsufficiency",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "theme": "selfsufficiency",
+   "query": "autosuffisance des ménages culture OR foncier solidaire OR réseau d'entraide économie"
+  },
+  {
+   "label": "Deutsch · selfsufficiency",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "theme": "selfsufficiency",
+   "query": "Selbstversorgung Haushalte Anbau OR Gemeinschaftsbodenfonds OR Netzwerk gegenseitiger Hilfe"
+  },
+  {
+   "label": "Italiano · selfsufficiency",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "theme": "selfsufficiency",
+   "query": "autosufficienza domestica coltivazione OR fondo fondiario comunitario OR rete di mutuo aiuto"
+  },
+  {
+   "label": "日本語 · selfsufficiency",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "theme": "selfsufficiency",
+   "query": "自給自足 家庭 菜園 OR コミュニティ土地信託 OR 相互扶助 ネットワーク"
+  },
+  {
+   "label": "한국어 · selfsufficiency",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "theme": "selfsufficiency",
+   "query": "자급자족 가정 텃밭 OR 공동체 토지 신탁 OR 상호부조 네트워크"
+  },
+  {
+   "label": "中文 · selfsufficiency",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "theme": "selfsufficiency",
+   "query": "家庭 自給自足 種植 OR 社羣土地信託 OR 互助 網路"
+  },
+  {
+   "label": "English (US) · barriers",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "theme": "barriers",
+   "query": "occupational licensing barrier OR startup capital barrier poor OR credit access denied low income"
+  },
+  {
+   "label": "Español · barriers",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "theme": "barriers",
+   "query": "barreras de licencias profesionales OR acceso al crédito denegado rentas bajas"
+  },
+  {
+   "label": "Português (BR) · barriers",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "theme": "barriers",
+   "query": "barreiras de licenciamento profissional OR acesso ao crédito negado rendimentos baixos"
+  },
+  {
+   "label": "Français · barriers",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "theme": "barriers",
+   "query": "barrières des licences professionnelles OR accès au crédit refusé bas revenus"
+  },
+  {
+   "label": "Deutsch · barriers",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "theme": "barriers",
+   "query": "Berufszulassung als Hürde OR Kreditzugang verweigert Geringverdiener"
+  },
+  {
+   "label": "Italiano · barriers",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "theme": "barriers",
+   "query": "barriere delle licenze professionali OR accesso al credito negato redditi bassi"
+  },
+  {
+   "label": "日本語 · barriers",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "theme": "barriers",
+   "query": "資格制度 参入障壁 OR 低所得者 融資 拒否"
+  },
+  {
+   "label": "한국어 · barriers",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "theme": "barriers",
+   "query": "직업 면허 진입장벽 OR 저소득층 대출 거절"
+  },
+  {
+   "label": "中文 · barriers",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "theme": "barriers",
+   "query": "職業許可 門檻 OR 低收入 信貸 被拒"
+  }
+ ],
+ "events": [
+  {
+   "label": "Inequality data releases",
+   "lang": "en",
+   "standing": "official",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"World Inequality Report\" OR \"Gini coefficient\" OR \"household survey\" inequality OR \"income distribution\" data"
+  },
+  {
+   "label": "IMF and World Bank findings",
+   "lang": "en",
+   "standing": "official",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "IMF report inequality OR \"World Bank\" poverty OR \"shared prosperity\" report"
+  },
+  {
+   "label": "Central bank and stability warnings",
+   "lang": "en",
+   "standing": "official",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"financial stability\" report OR \"systemic risk\" warning OR \"stress test\" results bank"
+  },
+  {
+   "label": "Regulator enforcement",
+   "lang": "en",
+   "standing": "official",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "SEC charges OR \"Financial Conduct Authority\" fine OR regulator settlement trading OR \"market abuse\" penalty"
+  },
+  {
+   "label": "Court rulings on finance",
+   "lang": "en",
+   "standing": "official",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "court ruling bank OR \"securities fraud\" verdict OR \"equal pay\" ruling OR tax ruling multinational"
+  },
+  {
+   "label": "Shareholder concentration research",
+   "lang": "en",
+   "standing": "research",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"common ownership\" OR \"index funds\" ownership OR \"Big Three\" asset managers research"
+  },
+  {
+   "label": "Private markets shift",
+   "lang": "en",
+   "standing": "research",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"listed companies\" decline OR \"IPO drought\" OR \"private markets\" growth OR \"shrinking stock market\""
+  },
+  {
+   "label": "Market structure research",
+   "lang": "en",
+   "standing": "research",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"market structure\" reform OR \"best execution\" OR \"retail order flow\" study"
+  },
+  {
+   "label": "Tax and offshore investigations",
+   "lang": "en",
+   "standing": "research",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "offshore leak OR \"tax haven\" investigation OR \"effective tax rate\" multinational"
+  },
+  {
+   "label": "Wealth and billionaire tracking",
+   "lang": "en",
+   "standing": "research",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "billionaire wealth OR \"great wealth transfer\" OR \"family office\" growth"
+  },
+  {
+   "label": "Union and campaign responses",
+   "lang": "en",
+   "standing": "rights",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"tax the rich\" campaign OR union pay demand OR \"living wage\" campaign OR inequality protest"
+  },
+  {
+   "label": "Corporate accountability",
+   "lang": "en",
+   "standing": "rights",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "greenwashing claim OR \"corporate lobbying\" finance OR \"beneficial ownership\" register"
+  },
+  {
+   "label": "Debt and the global south",
+   "lang": "en",
+   "standing": "rights",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"debt justice\" OR \"sovereign debt\" restructuring OR \"debt cancellation\" campaign"
+  },
+  {
+   "label": "Access and exclusion in finance",
+   "lang": "en",
+   "standing": "rights",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"financial exclusion\" OR \"bank branch closure\" OR \"financial literacy\" barrier"
+  },
+  {
+   "label": "Housing and rent",
+   "lang": "en",
+   "standing": "rights",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"rent burden\" OR eviction record OR \"housing affordability\" crisis"
+  },
+  {
+   "label": "Self-sufficiency and alternatives",
+   "lang": "en",
+   "standing": "rights",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"worker cooperative\" growth OR \"community land trust\" OR \"food sovereignty\" movement"
+  }
+ ]
 }
